@@ -275,7 +275,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/04/post/" itemprop="url">
+                <a class="post-title-link" href="/2016/06/04/Reactor模式/" itemprop="url">
                   Reactor模式
                 </a>
               
@@ -319,8 +319,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/04/post/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/04/post/" itemprop="commentsCount"></span>
+                <a href="/2016/06/04/Reactor模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/04/Reactor模式/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,7 +330,7 @@
 
           
           
-             <span id="/2016/06/04/post/" class="leancloud_visitors" data-flag-title="Reactor模式">
+             <span id="/2016/06/04/Reactor模式/" class="leancloud_visitors" data-flag-title="Reactor模式">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -357,7 +357,7 @@
 <h3 id="什么是Reactor模式"><a href="#什么是Reactor模式" class="headerlink" title="什么是Reactor模式"></a>什么是Reactor模式</h3><p>要回答这个问题，首先当然是求助Google或Wikipedia，其中Wikipedia上说：“The reactor design pattern is an event handling pattern for handling service requests delivered concurrently by one or more inputs. The service handler then demultiplexes the incoming requests and dispatches them synchronously to associated request handlers.”。从这个描述中，我们知道Reactor模式首先是事件驱动的，有一个或多个并发输入源，有一个Service Handler，有多个Request Handlers；这个Service Handler会同步的将输入的请求（Event）多路复用的分发给相应的Request Handler。如果用图来表达：<br><img src="http://i.imgur.com/jIKK929.png" alt=""> </p>
 <p>从结构上，这有点类似生产者消费者模式，即有一个或多个生产者将事件放入一个Queue中，而一个或多个消费者主动的从这个Queue中Poll事件来处理；而Reactor模式则并没有Queue来做缓冲，每当一个Event输入到Service Handler之后，该Service Handler会主动的根据不同的Event类型将其分发给对应的Request Handler来处理。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/04/post/#more" rel="contents">
+            <a class="btn" href="/2016/06/04/Reactor模式/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -678,6 +678,163 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/15/Github+Hexo搭建个人博客/" itemprop="url">
+                  Github+Hexo搭建个人博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-15T23:10:04+08:00" content="2016-05-15">
+              2016-05-15
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/15/Github+Hexo搭建个人博客/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/15/Github+Hexo搭建个人博客/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/15/Github+Hexo搭建个人博客/" class="leancloud_visitors" data-flag-title="Github+Hexo搭建个人博客">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>想搭建个人博客，Github+Hexo是个不错的选择。</p>
+<h3 id="为什么选择Github-Hexo"><a href="#为什么选择Github-Hexo" class="headerlink" title="为什么选择Github+Hexo"></a>为什么选择Github+Hexo</h3><ul>
+<li>Git - 最先进的开源分布式版本控制系统</li>
+<li><p>GitHub - 全球最大的社交编程及代码托管网站</p>
+<ul>
+<li>Github Pages - Github提供的<strong>免费</strong>的静态站点，Github pages具备两种模式：<br>  1 User/Organization Pages个人或公司站点<br>  2 Project Pages项目站点</li>
+</ul>
+</li>
+<li><p>Hexo快速、简洁且高效的博客框架 </p>
+<ul>
+<li>急速生成页面</li>
+<li>支持Markdown</li>
+<li>一键部署博客</li>
+<li>丰富的插件、主题支持</li>
+</ul>
+</li>
+</ul>
+<h3 id="创建Github-Pages"><a href="#创建Github-Pages" class="headerlink" title="创建Github Pages"></a>创建Github Pages</h3><ol>
+<li>Github网站注册账号</li>
+<li>创建仓库username.github.io   </li>
+</ol>
+<blockquote>
+<p>需要注意，新建仓库名称必须符合标准要求，username为Github账号的用户名称，建立成功之后，Github会自动将识别此仓库为Github Pages站点</p>
+</blockquote>
+<h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><blockquote>
+<p>以下为Mac环境操作记录，个别安装请根据自己系统调整</p>
+</blockquote>
+<h4 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h4><ul>
+<li><p>安装依赖软件</p>
+<ul>
+<li><p>Node.js ( 含npm )</p>
+<p>  <code>$ brew install node</code></p>
+</li>
+<li><p>Git</p>
+<p>  <code>$ brew install git</code></p>
+</li>
+</ul>
+</li>
+<li><p>安装Hexo   </p>
+<p>  <code>$ sudo npm install hexo-cli -g</code>    </p>
+<blockquote>
+<p>Linux / OS X 系统下需要 sudo 管理员安装，否则会出现以下错误。如果出现可以尝试 <strong>npm install hexo –no-optional</strong> 安装解决。但此错误并不影响Hexo正常使用。</p>
+</blockquote>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [Error: Cannot find module &apos;./build/Release/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;    </span><br><span class="line">&#123; [Error: Cannot find module &apos;./build/default/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</span><br><span class="line">&#123; [Error: Cannot find module &apos;./build/Debug/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/15/Github+Hexo搭建个人博客/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/15/Git命令拾遗/" itemprop="url">
                   Git学习笔记 - 命令拾遗
                 </a>
@@ -786,163 +943,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~ git diff 1.txt</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/15/Git命令拾遗/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/15/Github+Hexo搭建个人博客/" itemprop="url">
-                  Github+Hexo搭建个人博客
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-15T23:10:04+08:00" content="2016-05-15">
-              2016-05-15
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/15/Github+Hexo搭建个人博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/15/Github+Hexo搭建个人博客/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/05/15/Github+Hexo搭建个人博客/" class="leancloud_visitors" data-flag-title="Github+Hexo搭建个人博客">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>想搭建个人博客，Github+Hexo是个不错的选择。</p>
-<h3 id="为什么选择Github-Hexo"><a href="#为什么选择Github-Hexo" class="headerlink" title="为什么选择Github+Hexo"></a>为什么选择Github+Hexo</h3><ul>
-<li>Git - 最先进的开源分布式版本控制系统</li>
-<li><p>GitHub - 全球最大的社交编程及代码托管网站</p>
-<ul>
-<li>Github Pages - Github提供的<strong>免费</strong>的静态站点，Github pages具备两种模式：<br>  1 User/Organization Pages个人或公司站点<br>  2 Project Pages项目站点</li>
-</ul>
-</li>
-<li><p>Hexo快速、简洁且高效的博客框架 </p>
-<ul>
-<li>急速生成页面</li>
-<li>支持Markdown</li>
-<li>一键部署博客</li>
-<li>丰富的插件、主题支持</li>
-</ul>
-</li>
-</ul>
-<h3 id="创建Github-Pages"><a href="#创建Github-Pages" class="headerlink" title="创建Github Pages"></a>创建Github Pages</h3><ol>
-<li>Github网站注册账号</li>
-<li>创建仓库username.github.io   </li>
-</ol>
-<blockquote>
-<p>需要注意，新建仓库名称必须符合标准要求，username为Github账号的用户名称，建立成功之后，Github会自动将识别此仓库为Github Pages站点</p>
-</blockquote>
-<h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><blockquote>
-<p>以下为Mac环境操作记录，个别安装请根据自己系统调整</p>
-</blockquote>
-<h4 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h4><ul>
-<li><p>安装依赖软件</p>
-<ul>
-<li><p>Node.js ( 含npm )</p>
-<p>  <code>$ brew install node</code></p>
-</li>
-<li><p>Git</p>
-<p>  <code>$ brew install git</code></p>
-</li>
-</ul>
-</li>
-<li><p>安装Hexo   </p>
-<p>  <code>$ sudo npm install hexo-cli -g</code>    </p>
-<blockquote>
-<p>Linux / OS X 系统下需要 sudo 管理员安装，否则会出现以下错误。如果出现可以尝试 <strong>npm install hexo –no-optional</strong> 安装解决。但此错误并不影响Hexo正常使用。</p>
-</blockquote>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [Error: Cannot find module &apos;./build/Release/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;    </span><br><span class="line">&#123; [Error: Cannot find module &apos;./build/default/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</span><br><span class="line">&#123; [Error: Cannot find module &apos;./build/Debug/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/15/Github+Hexo搭建个人博客/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
