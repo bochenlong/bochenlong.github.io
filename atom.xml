@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bochenlong.github.io/"/>
-  <updated>2016-06-04T10:48:59.237Z</updated>
+  <updated>2016-06-16T08:20:02.854Z</updated>
   <id>http://bochenlong.github.io/</id>
   
   <author>
@@ -14,6 +14,447 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MongoDB学习笔记02【基础知识】</title>
+    <link href="http://bochenlong.github.io/2016/06/16/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B002%E3%80%90%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E3%80%91/"/>
+    <id>http://bochenlong.github.io/2016/06/16/MongoDB学习笔记02【基础知识】/</id>
+    <published>2016-06-16T02:25:58.000Z</published>
+    <updated>2016-06-16T08:20:02.854Z</updated>
+    
+    <content type="html">&lt;p&gt;在MongoDB中基本的概念是文档、集合、数据库，下图与RDBMS对比，比较容易理解。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;SQL术语&lt;/th&gt;
+&lt;th&gt;MongoDB术语&lt;/th&gt;
+&lt;th&gt;解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;database&lt;/td&gt;
+&lt;td&gt;database&lt;/td&gt;
+&lt;td&gt;数据库&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;table&lt;/td&gt;
+&lt;td&gt;collection&lt;/td&gt;
+&lt;td&gt;数据库表/集合&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;row&lt;/td&gt;
+&lt;td&gt;document&lt;/td&gt;
+&lt;td&gt;数据记录行/文档&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;column&lt;/td&gt;
+&lt;td&gt;field&lt;/td&gt;
+&lt;td&gt;数据字段/域&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;index&lt;/td&gt;
+&lt;td&gt;index&lt;/td&gt;
+&lt;td&gt;索引&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;table&lt;/td&gt;
+&lt;td&gt;joins&lt;/td&gt;
+&lt;td&gt;表连接,MongoDB不支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;primary key&lt;/td&gt;
+&lt;td&gt;primary key&lt;/td&gt;
+&lt;td&gt;主键,MongoDB自动将_id字段设置为主键&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&quot;数据库DataBase&quot;&gt;&lt;a href=&quot;#数据库DataBase&quot; class=&quot;headerlink&quot; title=&quot;数据库DataBase&quot;&gt;&lt;/a&gt;数据库DataBase&lt;/h3&gt;&lt;p&gt;一个MongoDB可以建多个数据库。MongoDB的默认数据库为”db”,即启动时前创建的”/data/db”目录。&lt;/p&gt;
+&lt;h4 id=&quot;常用命令&quot;&gt;&lt;a href=&quot;#常用命令&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;查看数据库 &lt;code&gt;show dbs&lt;/code&gt;&lt;blockquote&gt;
+&lt;p&gt;如果数据库为空，则不会显示&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;显示当前数据库对象 &lt;code&gt;db&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;切换/创建数据库 &lt;code&gt;use local&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;删除数据库 &lt;code&gt;db.dropDatabase()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;命名规范&quot;&gt;&lt;a href=&quot;#命名规范&quot; class=&quot;headerlink&quot; title=&quot;命名规范&quot;&gt;&lt;/a&gt;命名规范&lt;/h4&gt;&lt;p&gt;数据库的命名需符合以下条件：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1 不能是空字符串（””)。&lt;br&gt;2 不得含有’ ‘（空格)、.、$、/、\和\0 (空宇符)。&lt;br&gt;3 应全部小写。&lt;br&gt;4 最多64字节。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注意有一些数据库名是保留的：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;admin：&lt;/strong&gt;从权限的角度来看，这是”root”数据库。要是将一个用户添加到这个数据库，这个用户自动继承所有数据库的权限。一些特定的服务器端命令也只能从这个数据库运行，比如列出所有的数据库或者关闭服务器。&lt;br&gt;&lt;strong&gt;local：&lt;/strong&gt; 这个数据永远不会被复制，可以用来存储限于本地单台服务器的任意集合&lt;br&gt;&lt;strong&gt;config：&lt;/strong&gt; 当Mongo用于分片设置时，config数据库在内部使用，用于保存分片的相关信息。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;文档Document&quot;&gt;&lt;a href=&quot;#文档Document&quot; class=&quot;headerlink&quot; title=&quot;文档Document&quot;&gt;&lt;/a&gt;文档Document&lt;/h3&gt;&lt;p&gt;文档是一个键值(key-value)对(即BSON)。MongoDB 的文档不需要设置相同的字段，并且相同的字段不需要相同的数据类型。例如：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;quot;site&amp;quot;:&amp;quot;bochenlong.github.io&amp;quot;, &amp;quot;name&amp;quot;:&amp;quot;MongoDB学习笔记本02&amp;quot;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;需要注意的是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文档中的键/值对是有序的。&lt;/li&gt;
+&lt;li&gt;文档中的值不仅可以是在双引号里面的字符串，还可以是其他几种数据类型（甚至可以是整个嵌入的文档)。&lt;/li&gt;
+&lt;li&gt;MongoDB区分类型和大小写。&lt;/li&gt;
+&lt;li&gt;MongoDB的文档不能有重复的键。&lt;/li&gt;
+&lt;li&gt;文档的键是字符串。除了少数例外情况，键可以使用任意UTF-8字符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;常用命令-1&quot;&gt;&lt;a href=&quot;#常用命令-1&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h4&gt;&lt;h5 id=&quot;插入文档&quot;&gt;&lt;a href=&quot;#插入文档&quot; class=&quot;headerlink&quot; title=&quot;插入文档&quot;&gt;&lt;/a&gt;插入文档&lt;/h5&gt;&lt;p&gt;&lt;code&gt;db.COLLECTION_NAME.insert(document)&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果集合不存在，会自动创建&lt;br&gt;亦可以定义document=({})变量再做插入&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&quot;查看文档&quot;&gt;&lt;a href=&quot;#查看文档&quot; class=&quot;headerlink&quot; title=&quot;查看文档&quot;&gt;&lt;/a&gt;查看文档&lt;/h5&gt;&lt;p&gt;&lt;code&gt;db.COLLECTION_NAME.find()&lt;/code&gt;&lt;br&gt;输出结果美观 &lt;code&gt;db.COLLECTION_NAME.find().pretty()&lt;/code&gt;&lt;br&gt;查看一个文档 &lt;code&gt;db.COLLECTION_NAME.findOne()&lt;/code&gt;&lt;br&gt;查看指定个数文档 &lt;code&gt;db.COLLECTION_NAME.find().limit(NUMBER)&lt;/code&gt;&lt;br&gt;跳过指定个数文档 &lt;code&gt;db.COLLECTION_NAME.find().skip(NUMBER)&lt;/code&gt;&lt;br&gt;指定排序查看文档 &lt;code&gt;db.CONLLECTION_NAME.find().sort({key:value}}&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1 和 -1 来指定排序的方式，其中 1 为升序排列，而-1是用于降序排列。默认按照文档的升序排列&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&quot;更新文档&quot;&gt;&lt;a href=&quot;#更新文档&quot; class=&quot;headerlink&quot; title=&quot;更新文档&quot;&gt;&lt;/a&gt;更新文档&lt;/h5&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;db.COLLECTION_NAME.update(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;query&amp;gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;update&amp;gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      upsert:&amp;lt;boolean&amp;gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      multi:&amp;lt;boolean&amp;gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      writeConcern:&amp;lt;document&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;query :&lt;/strong&gt; update的查询条件，类似sql update查询内where后面的。&lt;br&gt;&lt;strong&gt;update :&lt;/strong&gt; update的对象和一些更新的操作符（如$,$inc…）等，也可以理解为sql update查询内set后面的&lt;br&gt;&lt;strong&gt;upsert :&lt;/strong&gt; 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。&lt;br&gt;&lt;strong&gt;multi :&lt;/strong&gt; 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。&lt;br&gt;&lt;strong&gt;writeConcern :&lt;/strong&gt;可选，抛出异常的级别。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 例如：&lt;code&gt;db.user.update({&amp;#39;name&amp;#39;:&amp;#39;bochenlong&amp;#39;},{$set:{&amp;#39;name&amp;#39;:&amp;#39;bochenlong1&amp;#39;}})&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&quot;替换文档&quot;&gt;&lt;a href=&quot;#替换文档&quot; class=&quot;headerlink&quot; title=&quot;替换文档&quot;&gt;&lt;/a&gt;替换文档&lt;/h5&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;db.COLLECTION_NAME.save(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;lt;document&amp;gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     writeConcern: &amp;lt;document&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;   &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;document :&lt;/strong&gt; 文档数据&lt;br&gt;&lt;strong&gt;writeConcern :&lt;/strong&gt;可选，抛出异常的级别。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 例如：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;db.user.save(&amp;#123;&amp;quot;_id&amp;quot; : ObjectId(&amp;quot;5762436b7b4000ad140079ef&amp;quot;), &amp;quot;name&amp;quot; : &amp;quot;bochenlong2&amp;quot;, &amp;quot;age&amp;quot; : 1&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h5 id=&quot;删除文档&quot;&gt;&lt;a href=&quot;#删除文档&quot; class=&quot;headerlink&quot; title=&quot;删除文档&quot;&gt;&lt;/a&gt;删除文档&lt;/h5&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;db.COLLECTION_NAME.remove(&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;query&amp;gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    justOne: &amp;lt;boolean&amp;gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    writeConcern: &amp;lt;document&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;参数说明：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;query :&lt;/strong&gt;（可选）删除的文档的条件。&lt;br&gt;&lt;strong&gt;justOne : &lt;/strong&gt;（可选）如果设为 true 或 1，则只删除一个文档。&lt;br&gt;&lt;strong&gt;writeConcern :&lt;/strong&gt;（可选）抛出异常的级别。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt; 例如：&lt;code&gt;db.user.remove({&amp;quot;name&amp;quot;:&amp;quot;bochenlong2&amp;quot;},{justOne:true})&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&quot;命名规范-1&quot;&gt;&lt;a href=&quot;#命名规范-1&quot; class=&quot;headerlink&quot; title=&quot;命名规范&quot;&gt;&lt;/a&gt;命名规范&lt;/h4&gt;&lt;p&gt;文档键命名规范：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;键不能含有\0 (空字符)。这个字符用来表示键的结尾。&lt;/li&gt;
+&lt;li&gt;.和$有特别的意义，只有在特定环境下才能使用。&lt;/li&gt;
+&lt;li&gt;以下划线”_”开头的键是保留的(不是严格要求的)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;条件操作符&quot;&gt;&lt;a href=&quot;#条件操作符&quot; class=&quot;headerlink&quot; title=&quot;条件操作符&quot;&gt;&lt;/a&gt;条件操作符&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;操作&lt;/th&gt;
+&lt;th&gt;格式&lt;/th&gt;
+&lt;th&gt;范例&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;等于&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;{&amp;lt;key&amp;gt;:&amp;lt;value&amp;gt;}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;db.user.find({“name”:”bochenlong”}).pretty()&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;小于&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;{&amp;lt;key&amp;gt;:{$lt:&amp;lt;value&amp;gt;}}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;db.user.find({“age”:{$lt:50}}).pretty()&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;小于或等于&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;{&amp;lt;key&amp;gt;:{$lte:&amp;lt;value&amp;gt;}}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;db.user.find({“age”:{$lte:50}}).pretty()    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;大于&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;{&amp;lt;key&amp;gt;:{$gt:&amp;lt;value&amp;gt;}}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;db.user.find({“age”:{$gt:50}}).pretty()    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;大于或等于&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;{&amp;lt;key&amp;gt;:{$gte:&amp;lt;value&amp;gt;}}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;db.user.find({“age”:{$gte:50}}).pretty()&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;不等于&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;{&amp;lt;key&amp;gt;:{$ne:&amp;lt;value&amp;gt;}}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;db.user.find({“age”:{$ne:50}}).pretty()&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;AND&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;{key1:value1, key2:value2...}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;db.user.find({“age”:{$lt:50},”name”:”bochenlong”})&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;OR&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;{$or:[key1:value1, key2:value2...]}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;db.user.find({$or:[{“age”:{$lt:50}},{“name”:”bochenlong”}]})&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$type&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;{&amp;lt;key&amp;gt;:{$type:&amp;lt;value&amp;gt;}}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;db.user.find({“name”:{$type:2}})&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;$type的value主要为下： Double-1,String-2,Object-3,Array-4,Binary data-5,Undefined-6(已废弃),Object id-7,Boolean-8,Date-9,Null-10,Regular Expression-11,JavaScript-13,Symbol-14,JavaScript (with scope)-15,32-bit integer-16,Timestamp-17,64-bit integer-18,Min key-225(Query with -1),Max key-127&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;集合Collection&quot;&gt;&lt;a href=&quot;#集合Collection&quot; class=&quot;headerlink&quot; title=&quot;集合Collection&quot;&gt;&lt;/a&gt;集合Collection&lt;/h3&gt;&lt;p&gt;集合就是 MongoDB 文档组。集合存在于数据库中，集合没有固定的结构，这意味着你在对集合可以插入不同格式和类型的数据，但通常情况下我们插入集合的数据都会有一定的关联性。比如，我们可以将以下不同数据结构的文档插入到集合中：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;quot;site&amp;quot;:&amp;quot;bochenlong.github.io&amp;quot;, &amp;quot;name&amp;quot;:&amp;quot;MongoDB学习笔记本02&amp;quot;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;quot;site&amp;quot;:&amp;quot;bochenlong.github.io&amp;quot;, &amp;quot;name&amp;quot;:&amp;quot;MongoDB学习笔记本02&amp;quot;,num:&amp;quot;001&amp;quot;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;当第一个文档插入时，集合就会被创建。&lt;/p&gt;
+&lt;h4 id=&quot;命名规范-2&quot;&gt;&lt;a href=&quot;#命名规范-2&quot; class=&quot;headerlink&quot; title=&quot;命名规范&quot;&gt;&lt;/a&gt;命名规范&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;集合名不能是空字符串””。&lt;/li&gt;
+&lt;li&gt;集合名不能含有\0字符（空字符)，这个字符表示集合名的结尾。&lt;/li&gt;
+&lt;li&gt;集合名不能以”system.”开头，这是为系统集合保留的前缀。&lt;/li&gt;
+&lt;li&gt;用户创建的集合名字不能含有保留字符。有些驱动程序的确支持在集合名里面包含，这是因为某些系统生成的集合中包含该字符。除非你要访问这种系统创建的集合，否则千万不要在名字里出现$。　&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;Capped-Collection&quot;&gt;&lt;a href=&quot;#Capped-Collection&quot; class=&quot;headerlink&quot; title=&quot;Capped Collection&quot;&gt;&lt;/a&gt;Capped Collection&lt;/h4&gt;&lt;p&gt;Capped Collection就是固定大小的Collection。它有很&lt;strong&gt;高的性能以及队列过期的特性&lt;/strong&gt;(过期按照插入的顺序)。&lt;br&gt;Capped Collections是高性能自动的维护对象的插入顺序。它非常适合类似记录日志的功能。和标准的collection不同，你必须要显式的创建一个Capped Collection,指定一个collection的大小，单位是字节。Collection的数据存储空间值是提前分配的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建 &lt;code&gt;db.createCollection(&amp;quot;mycc&amp;quot;, {capped:true, size:1000})&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在capped collection中，你能添加新的对象。&lt;br&gt;能进行更新，然而，对象不会增加存储空间。如果增加，更新就会失败 。&lt;br&gt;数据库不允许进行删除。使用drop()方法删除collection所有的行。&lt;br&gt;删除之后，你必须显式的重新创建这个collection。&lt;br&gt;在32bit机器中，capped collection最大存储为1e9个字节。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;元数据&quot;&gt;&lt;a href=&quot;#元数据&quot; class=&quot;headerlink&quot; title=&quot;元数据&quot;&gt;&lt;/a&gt;元数据&lt;/h3&gt;&lt;p&gt;数据库的信息是存储在集合中。它们使用了系统的命名空间 &lt;code&gt;dbname.system.*&lt;/code&gt;；在MongoDB数据库中名字空间 &lt;dbname&gt;.system.* 是包含多种系统信息的特殊集合(Collection)，如下:&lt;/dbname&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;集合命名空间&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;dbname.system.namespaces&lt;/td&gt;
+&lt;td&gt;列出所有名字空间。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dbname.system.indexes&lt;/td&gt;
+&lt;td&gt;列出所有索引。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dbname.system.profile&lt;/td&gt;
+&lt;td&gt;包含数据库概要(profile)信息。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dbname.system.users&lt;/td&gt;
+&lt;td&gt;列出所有可访问数据库的用户。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;dbname.local.sources&lt;/td&gt;
+&lt;td&gt;包含复制对端（slave）的服务器信息和状态。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;在&lt;code&gt;system.indexes&lt;/code&gt;插入数据，可以创建索引。但除此之外该表信息是不可变的(特殊的drop index命令将自动更新相关信息)。&lt;code&gt;system.users&lt;/code&gt;是可修改的。&lt;code&gt;system.profile&lt;/code&gt;是可删除的。&lt;/p&gt;
+&lt;h3 id=&quot;数据类型&quot;&gt;&lt;a href=&quot;#数据类型&quot; class=&quot;headerlink&quot; title=&quot;数据类型&quot;&gt;&lt;/a&gt;数据类型&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;数据类型&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;字符串。存储数据常用的数据类型。在 MongoDB 中，UTF-8 编码的字符串才是合法的。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Integer&lt;/td&gt;
+&lt;td&gt;整型数值。用于存储数值。根据你所采用的服务器，可分为 32 位或 64 位。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Boolean&lt;/td&gt;
+&lt;td&gt;布尔值。用于存储布尔值（真/假）。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Double&lt;/td&gt;
+&lt;td&gt;双精度浮点值。用于存储浮点值。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Min/Max keys&lt;/td&gt;
+&lt;td&gt;将一个值与 BSON（二进制的 JSON）元素的最低值和最高值相对比。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Arrays&lt;/td&gt;
+&lt;td&gt;用于将数组或列表或多个值存储为一个键。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Timestam&lt;/td&gt;
+&lt;td&gt;p    时间戳。记录文档修改或添加的具体时间。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Object&lt;/td&gt;
+&lt;td&gt;用于内嵌文档。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Null&lt;/td&gt;
+&lt;td&gt;用于创建空值。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Symbol&lt;/td&gt;
+&lt;td&gt;符号。该数据类型基本上等同于字符串类型，但不同的是，它一般用于采用特殊符号类型的语言。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Date&lt;/td&gt;
+&lt;td&gt;日期时间。用 UNIX 时间格式来存储当前日期或时间。你可以指定自己的日期时间：创建 Date 对象，传入年月日信息。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Object ID&lt;/td&gt;
+&lt;td&gt;对象 ID。用于创建文档的 ID。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Binary Data&lt;/td&gt;
+&lt;td&gt;二进制数据。用于存储二进制数据。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Code&lt;/td&gt;
+&lt;td&gt;代码类型。用于在文档中存储 JavaScript 代码。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Regular expression&lt;/td&gt;
+&lt;td&gt;正则表达式类型。用于存储正则表达式。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在MongoDB中基本的概念是文档、集合、数据库，下图与RDBMS对比，比较容易理解。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;SQL术语&lt;/th&gt;
+&lt;th&gt;MongoDB术语&lt;/th&gt;
+&lt;th&gt;解释&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+    
+    </summary>
+    
+      <category term="NoSql" scheme="http://bochenlong.github.io/categories/NoSql/"/>
+    
+    
+      <category term="MongoDB" scheme="http://bochenlong.github.io/tags/MongoDB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MongoDB学习笔记01【搭建环境】</title>
+    <link href="http://bochenlong.github.io/2016/06/16/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B001%E3%80%90%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83%E3%80%91/"/>
+    <id>http://bochenlong.github.io/2016/06/16/MongoDB学习笔记01【搭建环境】/</id>
+    <published>2016-06-16T01:35:11.000Z</published>
+    <updated>2016-06-16T05:58:10.978Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;MongoDB简介&quot;&gt;&lt;a href=&quot;#MongoDB简介&quot; class=&quot;headerlink&quot; title=&quot;MongoDB简介&quot;&gt;&lt;/a&gt;MongoDB简介&lt;/h3&gt;&lt;p&gt;MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。MongoDB 将数据存储为一个文档，数据结构由键值(key=&amp;gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。&lt;/p&gt;
+&lt;h3 id=&quot;MongoDB特点&quot;&gt;&lt;a href=&quot;#MongoDB特点&quot; class=&quot;headerlink&quot; title=&quot;MongoDB特点&quot;&gt;&lt;/a&gt;MongoDB特点&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;MongoDB的提供了一个面向文档存储，操作起来比较简单和容易。&lt;/li&gt;
+&lt;li&gt;你可以在MongoDB记录中设置任何属性的索引 (如：FirstName=”Sameer”,Address=”8 Gandhi Road”)来实现更快的排序。&lt;/li&gt;
+&lt;li&gt;你可以通过本地或者网络创建数据镜像，这使得MongoDB有更强的扩展性。&lt;/li&gt;
+&lt;li&gt;如果负载的增加（需要更多的存储空间和更强的处理能力） ，它可以分布在计算机网络中的其他节点上这就是所谓的分片。&lt;/li&gt;
+&lt;li&gt;Mongo支持丰富的查询表达式。查询指令使用JSON形式的标记，可轻易查询文档中内嵌的对象及数组。&lt;/li&gt;
+&lt;li&gt;MongoDb 使用update()命令可以实现替换完成的文档（数据）或者一些指定的数据字段 。&lt;/li&gt;
+&lt;li&gt;Mongodb中的Map/reduce主要是用来对数据进行批量处理和聚合操作。&lt;/li&gt;
+&lt;li&gt;Map和Reduce。Map函数调用emit(key,value)遍历集合中所有的记录，将key与value传给Reduce函数进行处理。&lt;/li&gt;
+&lt;li&gt;Map函数和Reduce函数是使用Javascript编写的，并可以通过db.runCommand或mapreduce命令来执行MapReduce操作。&lt;/li&gt;
+&lt;li&gt;GridFS是MongoDB中的一个内置功能，可以用于存放大量小文件。&lt;/li&gt;
+&lt;li&gt;MongoDB允许在服务端执行脚本，可以用Javascript编写某个函数，直接在服务端执行，也可以把函数的定义存储在服务端，下次直接调用即可。&lt;/li&gt;
+&lt;li&gt;MongoDB支持各种编程语言:RUBY，PYTHON，JAVA，C++，PHP，C#等多种语言。&lt;/li&gt;
+&lt;li&gt;MongoDB安装简单。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;MongoDB安装&quot;&gt;&lt;a href=&quot;#MongoDB安装&quot; class=&quot;headerlink&quot; title=&quot;MongoDB安装&quot;&gt;&lt;/a&gt;MongoDB安装&lt;/h3&gt;&lt;h4 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h4&gt;&lt;p&gt;&lt;em&gt;系统环境&lt;/em&gt; &lt;code&gt;CentOS release 6.6 (Final)&lt;/code&gt;&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;em&gt;软件安装&lt;/em&gt;，参照官网使用 &lt;strong&gt;yum&lt;/strong&gt; 方式安装&lt;br&gt;1 配置 &lt;strong&gt;yum&lt;/strong&gt; 源&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ touch /etc/yum.repos.d/mongodb-org-3.2.repo&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ vi /etc/yum.repos.d/mongodb-org-3.2.repo&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[mongodb-org-2.6]&lt;br&gt;  name=MongoDB 2.6 Repository&lt;br&gt;  baseurl=&lt;a href=&quot;http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/&lt;/a&gt;&lt;br&gt;  gpgcheck=0&lt;br&gt;  enabled=1&lt;br&gt;2 安装MongoDB&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo yum install -y mongodb-org&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;或者自定义&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo yum install -y mongodb-org-3.2.7 mongodb-org-server-3.2.7 mongodb-org-shell-3.2.7 mongodb-org-mongos-3.2.7 mongodb-org-tools-3.2.7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;启动&quot;&gt;&lt;a href=&quot;#启动&quot; class=&quot;headerlink&quot; title=&quot;启动&quot;&gt;&lt;/a&gt;启动&lt;/h4&gt;&lt;p&gt;首先，需要手动创建MongoDB的数据库目录，默认为&lt;code&gt;/data/db&lt;/code&gt;：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ mkdir /data/db&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ mongod&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;亦可以通过指定目录来运行MongoDB：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ mongod --dbpath&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;需要注意，MongoDB官方建议我们使用&lt;code&gt;非root&lt;/code&gt;用户且关闭&lt;code&gt;transparent_hugepage&lt;/code&gt;：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;2016-06-15T11:42:34.371+0800 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2016-06-15T11:42:34.371+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is &amp;apos;always&amp;apos;.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2016-06-15T11:42:34.371+0800 I CONTROL  [initandlisten] **        We suggest setting it to &amp;apos;never&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2016-06-15T11:42:34.371+0800 I CONTROL  [initandlisten] &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2016-06-15T11:42:34.371+0800 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is &amp;apos;always&amp;apos;.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2016-06-15T11:42:34.371+0800 I CONTROL  [initandlisten] **        We suggest setting it to &amp;apos;never&amp;apos;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;第一个问题，MongoDB在 &lt;strong&gt;yum&lt;/strong&gt; 安装的时候会自动创建 &lt;strong&gt;mongod&lt;/strong&gt; 用户，因此我们使用 &lt;strong&gt;mongod&lt;/strong&gt;用户启动：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ cat /etc/passwd &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt; mongod:x:497:496:mongod:/var/lib/mongo:/bin/false&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ cp /etc/skel/.bash_logout .bash_profile .bashrc /home/mongod&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt; /var/lib/mongo 为mongod用户的根目录，初始化用户根目录，否则切换用户出现$ -bash-4.1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ vi /etc/passwd &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt; /bin/false是最严格的禁止login选项，一切服务都不能用。修改/bin/false为/bin/bash&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ su - mongod &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ mongod&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;第二、三个问题，Mongod官方建议关闭Linux的内存巨页（脚本方式）：&lt;br&gt;&lt;strong&gt;1 创建开机启动服务&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ touch /etc/init.d/disable-transparent-hugepages&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ vi /etc/init.d/disable-transparent-hugepages&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#!/bin/sh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;### BEGIN INIT INFO&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Provides:          disable-transparent-hugepages&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Required-Start:    $local_fs&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Required-Stop:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# X-Start-Before:    mongod mongodb-mms-automation-agent&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Default-Start:     2 3 4 5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Default-Stop:      0 1 6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Short-Description: Disable Linux transparent huge pages&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;# Description:       Disable Linux transparent huge pages, to improve&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#                    database performance.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;### END INIT INFO&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;case $1 in&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  start)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if [ -d /sys/kernel/mm/transparent_hugepage ]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      thp_path=/sys/kernel/mm/transparent_hugepage&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    elif [ -d /sys/kernel/mm/redhat_transparent_hugepage ]; then&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      thp_path=/sys/kernel/mm/redhat_transparent_hugepage&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    else&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      return 0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    fi&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;apos;never&amp;apos; &amp;gt; $&amp;#123;thp_path&amp;#125;/enabled&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echo &amp;apos;never&amp;apos; &amp;gt; $&amp;#123;thp_path&amp;#125;/defrag&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    unset thp_path&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    ;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;esac&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;2 设置开机启动&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo chmod 755 /etc/init.d/disable-transparent-hugepages&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ 6/16/2016 10:08:56 AM&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;具体也可参见官方 &lt;a href=&quot;https://docs.mongodb.com/manual/tutorial/transparent-huge-pages/#configure-thp-tuned&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://docs.mongodb.com/manual/tutorial/transparent-huge-pages/#configure-thp-tuned&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;MongoDB交互&quot;&gt;&lt;a href=&quot;#MongoDB交互&quot; class=&quot;headerlink&quot; title=&quot;MongoDB交互&quot;&gt;&lt;/a&gt;MongoDB交互&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;MongoDB Shell是MongoDB自带的交互式Javascript shell，用来对MongoDB进行操作和管理的交互式环境。&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[root@localhost ~]# mongo&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;MongoDB shell version: 3.2.7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;connecting to: test&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;亦可以通过 &lt;code&gt;mongodb://username:password@hostname/dbname&lt;/code&gt;，比如：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;// 链接本地数据库&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mongodb://localhost&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// 安全模式链接到本地数据库&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mongodb://localhost/?safe=true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// 直接连接第一个服务器，无论是replica set一部分或者主服务器或者从服务器。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mongodb://host1,host2,host3/?connect=direct;slaveOk=true&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;参数选项说明：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;选项&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;replicaSet=name&lt;/td&gt;
+&lt;td&gt;验证replica set的名称。 Impliesconnect=replicaSet.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;slaveOk=true/false&lt;/td&gt;
+&lt;td&gt;true:在connect=direct模式下，驱动会连接第一台机器，即使这台服务器不是主。在connect=replicaSet模式下，驱动会发送所有的写请求到主并且把读取操作分布在其他从服务器。false: 在 connect=direct模式下，驱动会自动找寻主服务器. 在connect=replicaSet 模式下，驱动仅仅连接主服务器，并且所有的读写命令都连接到主服务器。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;safe=true/false&lt;/td&gt;
+&lt;td&gt;true: 在执行更新操作之后，驱动都会发送getLastError命令来确保更新成功。(还要参考 wtimeoutMS). false: 在每次更新之后，驱动不会发送getLastError来确保更新成功。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;w=n&lt;/td&gt;
+&lt;td&gt;驱动添加 { w : n } 到getLastError命令. 应用于safe=true。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;wtimeoutMS=ms&lt;/td&gt;
+&lt;td&gt;驱动添加 { wtimeout : ms } 到 getlasterror 命令. 应用于 safe=true.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;fsync=true/false&lt;/td&gt;
+&lt;td&gt;true: 驱动添加 { fsync : true } 到 getlasterror 命令.应用于 safe=true.  false: 驱动不会添加到getLastError命令中。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;journal=true/false&lt;/td&gt;
+&lt;td&gt;如果设置为 true, 同步到 journal (在提交到数据库前写入到实体中). 应用于 safe=true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;connectTimeoutMS=ms&lt;/td&gt;
+&lt;td&gt;可以打开连接的时间。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;socketTimeoutMS=ms&lt;/td&gt;
+&lt;td&gt;发送和接受sockets的时间。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol&gt;
+&lt;li&gt;MongoDB 提供了简单的 HTTP 用户界面。 如果你想启用该功能，需要在启动的时候指定参数 –rest 。&lt;br&gt;&lt;img src=&quot;http://i.imgur.com/6WQwxFw.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;MongoDB关闭&quot;&gt;&lt;a href=&quot;#MongoDB关闭&quot; class=&quot;headerlink&quot; title=&quot;MongoDB关闭&quot;&gt;&lt;/a&gt;MongoDB关闭&lt;/h3&gt;&lt;p&gt;从MongoDB的admin中关闭（推荐用这种方法）：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ use admin   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt; switched to db admin    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ db.shutdownServer()    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt; server should be down...&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;或者&lt;br&gt;&lt;code&gt;`
+mongod --shutdown&lt;/code&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;MongoDB简介&quot;&gt;&lt;a href=&quot;#MongoDB简介&quot; class=&quot;headerlink&quot; title=&quot;MongoDB简介&quot;&gt;&lt;/a&gt;MongoDB简介&lt;/h3&gt;&lt;p&gt;MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。MongoDB 将数据存储为一个文档，数据结构由键值(key=&amp;gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。&lt;/p&gt;
+&lt;h3 id=&quot;MongoDB特点&quot;&gt;&lt;a href=&quot;#MongoDB特点&quot; class=&quot;headerlink&quot; title=&quot;MongoDB特点&quot;&gt;&lt;/a&gt;MongoDB特点&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;MongoDB的提供了一个面向文档存储，操作起来比较简单和容易。&lt;/li&gt;
+&lt;li&gt;你可以在MongoDB记录中设置任何属性的索引 (如：FirstName=”Sameer”,Address=”8 Gandhi Road”)来实现更快的排序。&lt;/li&gt;
+&lt;li&gt;你可以通过本地或者网络创建数据镜像，这使得MongoDB有更强的扩展性。&lt;/li&gt;
+&lt;li&gt;如果负载的增加（需要更多的存储空间和更强的处理能力） ，它可以分布在计算机网络中的其他节点上这就是所谓的分片。&lt;/li&gt;
+&lt;li&gt;Mongo支持丰富的查询表达式。查询指令使用JSON形式的标记，可轻易查询文档中内嵌的对象及数组。&lt;/li&gt;
+&lt;li&gt;MongoDb 使用update()命令可以实现替换完成的文档（数据）或者一些指定的数据字段 。&lt;/li&gt;
+&lt;li&gt;Mongodb中的Map/reduce主要是用来对数据进行批量处理和聚合操作。&lt;/li&gt;
+&lt;li&gt;Map和Reduce。Map函数调用emit(key,value)遍历集合中所有的记录，将key与value传给Reduce函数进行处理。&lt;/li&gt;
+&lt;li&gt;Map函数和Reduce函数是使用Javascript编写的，并可以通过db.runCommand或mapreduce命令来执行MapReduce操作。&lt;/li&gt;
+&lt;li&gt;GridFS是MongoDB中的一个内置功能，可以用于存放大量小文件。&lt;/li&gt;
+&lt;li&gt;MongoDB允许在服务端执行脚本，可以用Javascript编写某个函数，直接在服务端执行，也可以把函数的定义存储在服务端，下次直接调用即可。&lt;/li&gt;
+&lt;li&gt;MongoDB支持各种编程语言:RUBY，PYTHON，JAVA，C++，PHP，C#等多种语言。&lt;/li&gt;
+&lt;li&gt;MongoDB安装简单。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;MongoDB安装&quot;&gt;&lt;a href=&quot;#MongoDB安装&quot; class=&quot;headerlink&quot; title=&quot;MongoDB安装&quot;&gt;&lt;/a&gt;MongoDB安装&lt;/h3&gt;&lt;h4 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h4&gt;&lt;p&gt;&lt;em&gt;系统环境&lt;/em&gt; &lt;code&gt;CentOS release 6.6 (Final)&lt;/code&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="NoSql" scheme="http://bochenlong.github.io/categories/NoSql/"/>
+    
+    
+      <category term="MongoDB" scheme="http://bochenlong.github.io/tags/MongoDB/"/>
+    
+  </entry>
   
   <entry>
     <title>Reactor模式</title>
