@@ -73,8 +73,6 @@
 
 
 
-  
-
 
   <link rel="alternate" href="/atom.xml" title="薄小破" type="application/atom+xml" />
 
@@ -170,7 +168,7 @@ index
 table
 joins
 表连接,">
-<meta property="og:updated_time" content="2016-06-16T08:20:02.854Z">
+<meta property="og:updated_time" content="2016-06-16T08:23:42.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB学习笔记02【基础知识】">
 <meta name="twitter:description" content="在MongoDB中基本的概念是文档、集合、数据库，下图与RDBMS对比，比较容易理解。
@@ -519,12 +517,12 @@ joins
 </li>
 <li>显示当前数据库对象 <code>db</code></li>
 <li>切换/创建数据库 <code>use local</code></li>
-<li>删除数据库 <code>db.dropDatabase()</code></li>
-</ul>
-<h4 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h4><p>数据库的命名需符合以下条件：</p>
-<blockquote>
+<li>删除数据库 <code>db.dropDatabase()</code><a id="more"></a>
+<h4 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h4>数据库的命名需符合以下条件：<blockquote>
 <p>1 不能是空字符串（””)。<br>2 不得含有’ ‘（空格)、.、$、/、\和\0 (空宇符)。<br>3 应全部小写。<br>4 最多64字节。</p>
 </blockquote>
+</li>
+</ul>
 <p>注意有一些数据库名是保留的：</p>
 <blockquote>
 <p><strong>admin：</strong>从权限的角度来看，这是”root”数据库。要是将一个用户添加到这个数据库，这个用户自动继承所有数据库的权限。一些特定的服务器端命令也只能从这个数据库运行，比如列出所有的数据库或者关闭服务器。<br><strong>local：</strong> 这个数据永远不会被复制，可以用来存储限于本地单台服务器的任意集合<br><strong>config：</strong> 当Mongo用于分片设置时，config数据库在内部使用，用于保存分片的相关信息。</p>
