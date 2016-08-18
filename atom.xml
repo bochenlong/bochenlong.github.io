@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bochenlong.github.io/"/>
-  <updated>2016-08-18T08:18:31.048Z</updated>
+  <updated>2016-08-18T08:37:48.475Z</updated>
   <id>http://bochenlong.github.io/</id>
   
   <author>
@@ -16,13 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>JAVA8-Stream整理</title>
-    <link href="http://bochenlong.github.io/2016/08/18/JAVA8-Stream%E6%95%B4%E7%90%86/"/>
-    <id>http://bochenlong.github.io/2016/08/18/JAVA8-Stream整理/</id>
+    <title>Jav8-Stream整理</title>
+    <link href="http://bochenlong.github.io/2016/08/18/Java8-Stream%E6%95%B4%E7%90%86/"/>
+    <id>http://bochenlong.github.io/2016/08/18/Java8-Stream整理/</id>
     <published>2016-08-18T08:04:21.000Z</published>
-    <updated>2016-08-18T08:18:31.048Z</updated>
+    <updated>2016-08-18T08:37:48.475Z</updated>
     
-    <content type="html">&lt;h3 id=&quot;JAVA8-Stream&quot;&gt;&lt;a href=&quot;#JAVA8-Stream&quot; class=&quot;headerlink&quot; title=&quot;JAVA8-Stream&quot;&gt;&lt;/a&gt;JAVA8-Stream&lt;/h3&gt;&lt;p&gt;流是JAVA8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;Java8-Stream&quot;&gt;&lt;a href=&quot;#Java8-Stream&quot; class=&quot;headerlink&quot; title=&quot;Java8-Stream&quot;&gt;&lt;/a&gt;Java8-Stream&lt;/h3&gt;&lt;p&gt;流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。&lt;/p&gt;
 &lt;h3 id=&quot;构建流&quot;&gt;&lt;a href=&quot;#构建流&quot; class=&quot;headerlink&quot; title=&quot;构建流&quot;&gt;&lt;/a&gt;构建流&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;由值创建流&lt;br&gt;使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;quot;name&amp;quot;,&amp;quot;passWord&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -75,7 +75,7 @@
 &lt;h4 id=&quot;终端操作&quot;&gt;&lt;a href=&quot;#终端操作&quot; class=&quot;headerlink&quot; title=&quot;终端操作&quot;&gt;&lt;/a&gt;终端操作&lt;/h4&gt;&lt;p&gt;终端操作消费一个流，获取一个具体的对象结果。&lt;/p&gt;
 &lt;h5 id=&quot;anyMatch-noneMatch-allMatch&quot;&gt;&lt;a href=&quot;#anyMatch-noneMatch-allMatch&quot; class=&quot;headerlink&quot; title=&quot;anyMatch/noneMatch/allMatch&quot;&gt;&lt;/a&gt;anyMatch/noneMatch/allMatch&lt;/h5&gt;&lt;p&gt;此三个方法为判断流中元素是否匹配给定的谓词，返回一个boolean值：anyMathch任意匹配；noneMathch全不匹配;allMathch都匹配。&lt;br&gt;如下是否有素食&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;boolean flag = menu.stream().anyMatch(Dish::isVegetarian);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;h5 id=&quot;findAny-findFirst&quot;&gt;&lt;a href=&quot;#findAny-findFirst&quot; class=&quot;headerlink&quot; title=&quot;findAny/findFirst&quot;&gt;&lt;/a&gt;findAny/findFirst&lt;/h5&gt;&lt;p&gt;返回当前流的任意/第一个元素，返回一个&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;对象&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Optional optional = menu.stream().findFirst();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Otpional&amp;lt;T&amp;gt;&lt;/code&gt;类是一个容器类，代表一个值存在或者不存在；JAVA8引入&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;，这样就不会出现NUll的问题了，比如上面如果菜单为空，如何获取第一个元素。&lt;br&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;提供了以下方法让你处理值不存在的情形：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Otpional&amp;lt;T&amp;gt;&lt;/code&gt;类是一个容器类，代表一个值存在或者不存在；Java8引入&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;，这样就不会出现NUll的问题了，比如上面如果菜单为空，如何获取第一个元素。&lt;br&gt;&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;提供了以下方法让你处理值不存在的情形：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;isPresent()&lt;/code&gt;将在&lt;code&gt;Optaional&lt;/code&gt;包含值的时候返回为true否则false&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;isPresent(Consumer&amp;lt;T&amp;gt; block)&lt;/code&gt;会在值存在的时候指定给定代码&lt;/li&gt;
@@ -85,11 +85,11 @@
 &lt;/ul&gt;
 &lt;h5 id=&quot;foreach&quot;&gt;&lt;a href=&quot;#foreach&quot; class=&quot;headerlink&quot; title=&quot;foreach&quot;&gt;&lt;/a&gt;foreach&lt;/h5&gt;&lt;p&gt;此方法对流中的每个元素应用一个&lt;code&gt;Comsumer&amp;lt;T&amp;gt;&lt;/code&gt;的函数，返回一个void类型；常常我们用来输出。&lt;br&gt;如下打印全部的菜单名称&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().forEach(a -&amp;gt; System.out.println(a.getName()));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;h5 id=&quot;collect&quot;&gt;&lt;a href=&quot;#collect&quot; class=&quot;headerlink&quot; title=&quot;collect&quot;&gt;&lt;/a&gt;collect&lt;/h5&gt;&lt;p&gt;将流 转换成其他形式，你可以把collect看做能够接受各种方案作为参数，并将流中的元素累积成一个汇总结果的操作。&lt;br&gt;比如将全部菜品收集到List中&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().map(Dish::getName).collect(Collectors.toList());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;collect实际上也是一种归约操作，接收Collecttors参数可以实现更高级的汇总，比如实现菜单按照素食非素质归类，按照热量范畴归类等等。见 &lt;a href=&quot;&quot;&gt;JAVA8-Collectors&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;collect实际上也是一种归约操作，接收Collecttors参数可以实现更高级的汇总，比如实现菜单按照素食非素质归类，按照热量范畴归类等等。见 &lt;a href=&quot;&quot;&gt;Java8-Collectors&lt;/a&gt;&lt;/p&gt;
 &lt;h5 id=&quot;reduce&quot;&gt;&lt;a href=&quot;#reduce&quot; class=&quot;headerlink&quot; title=&quot;reduce&quot;&gt;&lt;/a&gt;reduce&lt;/h5&gt;&lt;p&gt;reduce即归约操作，用来表达更复杂的查询，比如“计算菜单中的总热量”&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().map(Dish::getCalories).reduce(0,Integer::sum);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;reduce接收两个参数：&lt;br&gt;1 一个初始值&lt;br&gt;2 一个&lt;code&gt;BinaryOperator&amp;lt;T&amp;gt;&lt;/code&gt;来将两个元素结合起来产生一个新值，这里我们使用的是lambda (a,b) -&amp;gt; a+b，用方法引用简写了；&lt;br&gt;reduce还有一个变体，不接收初始值，返回一个&lt;code&gt;Optional&lt;/code&gt;对象，如&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().map(Dish::getCalories).reduce(Integer::sum);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;但是这种写法有性能问题，它有一个暗含的装箱成本，每个Integer必须拆分成一个原始类型再进行求和。Stream API提供了原始类型流特化来专门支持处理数值流的方法。见下。&lt;/p&gt;
-&lt;h5 id=&quot;原始类型特化&quot;&gt;&lt;a href=&quot;#原始类型特化&quot; class=&quot;headerlink&quot; title=&quot;原始类型特化&quot;&gt;&lt;/a&gt;原始类型特化&lt;/h5&gt;&lt;p&gt;JAVA8提供了3个原始类型流接口：IntStream/DoubleStream/LongStream，分别将流中的元素特化为int/long/double，从而避免暗含的装箱成本。每个接口都提供了常用的规约方法，比如max/sum/min等。&lt;br&gt;比如上面实例可以写成&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().mapToInt(Dish::getCalories).sum();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h5 id=&quot;原始类型特化&quot;&gt;&lt;a href=&quot;#原始类型特化&quot; class=&quot;headerlink&quot; title=&quot;原始类型特化&quot;&gt;&lt;/a&gt;原始类型特化&lt;/h5&gt;&lt;p&gt;Java8提供了3个原始类型流接口：IntStream/DoubleStream/LongStream，分别将流中的元素特化为int/long/double，从而避免暗含的装箱成本。每个接口都提供了常用的规约方法，比如max/sum/min等。&lt;br&gt;比如上面实例可以写成&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().mapToInt(Dish::getCalories).sum();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;注意：sum的默认值为0，如果为max()操作的话，将返回&lt;code&gt;OptionalInt&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;如果要将数值流转换回对象流，则需要&lt;code&gt;box()&lt;/code&gt;操作，比如&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Stream&amp;lt;Integer&amp;gt; stream = menu.stream().mapToInt(Dish::getCalories).boxed();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;h5 id=&quot;count&quot;&gt;&lt;a href=&quot;#count&quot; class=&quot;headerlink&quot; title=&quot;count&quot;&gt;&lt;/a&gt;count&lt;/h5&gt;&lt;p&gt;count即计数，计算流中元素的数量；实际上通过转化LongStream进行reduce操作获取的。&lt;br&gt;比如计算菜品总数&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().count();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -97,7 +97,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;JAVA8-Stream&quot;&gt;&lt;a href=&quot;#JAVA8-Stream&quot; class=&quot;headerlink&quot; title=&quot;JAVA8-Stream&quot;&gt;&lt;/a&gt;JAVA8-Stream&lt;/h3&gt;&lt;p&gt;流是JAVA8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。&lt;/p&gt;
+      &lt;h3 id=&quot;Java8-Stream&quot;&gt;&lt;a href=&quot;#Java8-Stream&quot; class=&quot;headerlink&quot; title=&quot;Java8-Stream&quot;&gt;&lt;/a&gt;Java8-Stream&lt;/h3&gt;&lt;p&gt;流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。&lt;/p&gt;
 &lt;h3 id=&quot;构建流&quot;&gt;&lt;a href=&quot;#构建流&quot; class=&quot;headerlink&quot; title=&quot;构建流&quot;&gt;&lt;/a&gt;构建流&lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;由值创建流&lt;br&gt;使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;quot;name&amp;quot;,&amp;quot;passWord&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
