@@ -98,7 +98,7 @@
 构建流
 由值创建流使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。
 1Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;q">
-<meta property="og:updated_time" content="2016-08-18T09:09:42.679Z">
+<meta property="og:updated_time" content="2016-08-18T09:13:00.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java8-Stream整理">
 <meta name="twitter:description" content="Java8-Stream流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。
@@ -368,6 +368,9 @@
 <li><p>由文件生成流</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">try (Stream&lt;String&gt; lines = Files.lines(Paths.get(&quot;Test.java&quot;), Charset.defaultCharset())) &#123;</span><br><span class="line"></span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<a id="more"></a>
+<ol>
 <li><p>由函数生成流：创建无线流<br>Stream API提供了两个静态方法来从函数生成流：Stream.iterate和Stream.generate。这两个操作可以创建所谓的无限流。一般来说应该使用limit(n)对这种流加以限制。</p>
 <ol>
 <li><p>迭代</p>
@@ -384,8 +387,7 @@
 </li>
 </ol>
 <p>这两个方法都接收起始值，但range不接收尾值，而rangeClose接收尾值。</p>
-<h3 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h3><a id="more"></a>
-<p>有了数据流，我们可以对流进行各种操作；操作前，你需要了解些Lambda和方法引用的内容。</p>
+<h3 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h3><p>有了数据流，我们可以对流进行各种操作；操作前，你需要了解些Lambda和方法引用的内容。</p>
 <h4 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h4><p>Lambda表达式有三个部分：</p>
 <ul>
 <li>参数列表</li>
