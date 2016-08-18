@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bochenlong.github.io/"/>
-  <updated>2016-08-18T09:07:02.639Z</updated>
+  <updated>2016-08-18T09:09:42.679Z</updated>
   <id>http://bochenlong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://bochenlong.github.io/2016/08/18/Java8-Stream%E6%95%B4%E7%90%86/"/>
     <id>http://bochenlong.github.io/2016/08/18/Java8-Stream整理/</id>
     <published>2016-08-18T08:04:21.000Z</published>
-    <updated>2016-08-18T09:07:02.639Z</updated>
+    <updated>2016-08-18T09:09:42.679Z</updated>
     
     <content type="html">&lt;h3 id=&quot;Java8-Stream&quot;&gt;&lt;a href=&quot;#Java8-Stream&quot; class=&quot;headerlink&quot; title=&quot;Java8-Stream&quot;&gt;&lt;/a&gt;Java8-Stream&lt;/h3&gt;&lt;p&gt;流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。&lt;/p&gt;
 &lt;h3 id=&quot;构建流&quot;&gt;&lt;a href=&quot;#构建流&quot; class=&quot;headerlink&quot; title=&quot;构建流&quot;&gt;&lt;/a&gt;构建流&lt;/h3&gt;&lt;ol&gt;
