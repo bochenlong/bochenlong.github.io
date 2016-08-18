@@ -98,7 +98,7 @@
 构建流
 由值创建流使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。
 1Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;q">
-<meta property="og:updated_time" content="2016-08-18T08:41:57.507Z">
+<meta property="og:updated_time" content="2016-08-18T09:02:38.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java8-Stream整理">
 <meta name="twitter:description" content="Java8-Stream流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。
@@ -378,11 +378,12 @@
 </li>
 </ol>
 <p>相比较而言，interate是依次生成一系列值，生成的时候依赖于前值；比如例子中的生成偶数，每次计算对上一个值应用相加函数；而generate不是依次对每个新生成的值应用函数，它接受一个函数Supplier<t>产生新的值（Supplier<t>产生一个对象）。</t></t></p>
-<a id="more"></a></li>
-<li>数值流特有的生成一定范围数值的流<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IntStream stream = IntStream.range(1,100);</span><br><span class="line">IntStream stream = IntStream.rangeClose(1,100);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数值流特有的生成一定范围数值的流</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IntStream stream = IntStream.range(1,100);</span><br><span class="line">IntStream stream = IntStream.rangeClose(1,100);</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>这两个方法都接收起始值，但range不接收尾值，而rangeClose接收尾值。</p>
+<p>这两个方法都接收起始值，但range不接收尾值，而rangeClose接收尾值。<br><a id="more"></a></p>
 <h3 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h3><p>有了数据流，我们可以对流进行各种操作；操作前，你需要了解些Lambda和方法引用的内容。</p>
 <h4 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h4><p>Lambda表达式有三个部分：</p>
 <ul>

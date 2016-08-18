@@ -374,6 +374,12 @@
 </li>
 </ol>
 <p>相比较而言，interate是依次生成一系列值，生成的时候依赖于前值；比如例子中的生成偶数，每次计算对上一个值应用相加函数；而generate不是依次对每个新生成的值应用函数，它接受一个函数Supplier<T>产生新的值（Supplier<T>产生一个对象）。</p>
+</li>
+<li><p>数值流特有的生成一定范围数值的流</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IntStream stream = IntStream.range(1,100);</span><br><span class="line">IntStream stream = IntStream.rangeClose(1,100);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这两个方法都接收起始值，但range不接收尾值，而rangeClose接收尾值。<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/18/Java8-Stream整理/#more" rel="contents">
               阅读全文 &raquo;

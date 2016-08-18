@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bochenlong.github.io/"/>
-  <updated>2016-08-18T08:41:57.507Z</updated>
+  <updated>2016-08-18T09:02:38.987Z</updated>
   <id>http://bochenlong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://bochenlong.github.io/2016/08/18/Java8-Stream%E6%95%B4%E7%90%86/"/>
     <id>http://bochenlong.github.io/2016/08/18/Java8-Stream整理/</id>
     <published>2016-08-18T08:04:21.000Z</published>
-    <updated>2016-08-18T08:41:57.507Z</updated>
+    <updated>2016-08-18T09:02:38.987Z</updated>
     
     <content type="html">&lt;h3 id=&quot;Java8-Stream&quot;&gt;&lt;a href=&quot;#Java8-Stream&quot; class=&quot;headerlink&quot; title=&quot;Java8-Stream&quot;&gt;&lt;/a&gt;Java8-Stream&lt;/h3&gt;&lt;p&gt;流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。&lt;/p&gt;
 &lt;h3 id=&quot;构建流&quot;&gt;&lt;a href=&quot;#构建流&quot; class=&quot;headerlink&quot; title=&quot;构建流&quot;&gt;&lt;/a&gt;构建流&lt;/h3&gt;&lt;ol&gt;
@@ -43,11 +43,12 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;相比较而言，interate是依次生成一系列值，生成的时候依赖于前值；比如例子中的生成偶数，每次计算对上一个值应用相加函数；而generate不是依次对每个新生成的值应用函数，它接受一个函数Supplier&lt;t&gt;产生新的值（Supplier&lt;t&gt;产生一个对象）。&lt;/t&gt;&lt;/t&gt;&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;数值流特有的生成一定范围数值的流&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;IntStream stream = IntStream.range(1,100);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;IntStream stream = IntStream.rangeClose(1,100);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数值流特有的生成一定范围数值的流&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;IntStream stream = IntStream.range(1,100);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;IntStream stream = IntStream.rangeClose(1,100);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;这两个方法都接收起始值，但range不接收尾值，而rangeClose接收尾值。&lt;/p&gt;
+&lt;p&gt;这两个方法都接收起始值，但range不接收尾值，而rangeClose接收尾值。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;流操作&quot;&gt;&lt;a href=&quot;#流操作&quot; class=&quot;headerlink&quot; title=&quot;流操作&quot;&gt;&lt;/a&gt;流操作&lt;/h3&gt;&lt;p&gt;有了数据流，我们可以对流进行各种操作；操作前，你需要了解些Lambda和方法引用的内容。&lt;/p&gt;
 &lt;h4 id=&quot;Lambda&quot;&gt;&lt;a href=&quot;#Lambda&quot; class=&quot;headerlink&quot; title=&quot;Lambda&quot;&gt;&lt;/a&gt;Lambda&lt;/h4&gt;&lt;p&gt;Lambda表达式有三个部分：&lt;/p&gt;
 &lt;ul&gt;
@@ -118,6 +119,12 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;相比较而言，interate是依次生成一系列值，生成的时候依赖于前值；比如例子中的生成偶数，每次计算对上一个值应用相加函数；而generate不是依次对每个新生成的值应用函数，它接受一个函数Supplier&lt;T&gt;产生新的值（Supplier&lt;T&gt;产生一个对象）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数值流特有的生成一定范围数值的流&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;IntStream stream = IntStream.range(1,100);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;IntStream stream = IntStream.rangeClose(1,100);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这两个方法都接收起始值，但range不接收尾值，而rangeClose接收尾值。&lt;br&gt;
     
     </summary>
     
