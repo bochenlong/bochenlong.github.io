@@ -275,8 +275,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/08/18/JAVA8-Stream/" itemprop="url">
-                  JAVA8-Stream
+                <a class="post-title-link" href="/2016/08/18/JAVA8-Stream整理/" itemprop="url">
+                  JAVA8-Stream整理
                 </a>
               
             
@@ -319,8 +319,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/18/JAVA8-Stream/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/18/JAVA8-Stream/" itemprop="commentsCount"></span>
+                <a href="/2016/08/18/JAVA8-Stream整理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/18/JAVA8-Stream整理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,7 +330,7 @@
 
           
           
-             <span id="/2016/08/18/JAVA8-Stream/" class="leancloud_visitors" data-flag-title="JAVA8-Stream">
+             <span id="/2016/08/18/JAVA8-Stream整理/" class="leancloud_visitors" data-flag-title="JAVA8-Stream整理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -375,170 +375,10 @@
 </ol>
 <p>相比较而言，interate是依次生成一系列值，生成的时候依赖于前值；比如例子中的生成偶数，每次计算对上一个值应用相加函数；而generate不是依次对每个新生成的值应用函数，它接受一个函数Supplier<T>产生新的值（Supplier<T>产生一个对象）。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/18/JAVA8-Stream/#more" rel="contents">
+            <a class="btn" href="/2016/08/18/JAVA8-Stream整理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/30/Java8-Lambda/" itemprop="url">
-                  Java8-Lambda
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-30T09:10:23+08:00" content="2016-06-30">
-              2016-06-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/06/30/Java8-Lambda/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/30/Java8-Lambda/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/30/Java8-Lambda/" class="leancloud_visitors" data-flag-title="Java8-Lambda">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="行为参数化"><a href="#行为参数化" class="headerlink" title="行为参数化"></a>行为参数化</h3><p>在软件工程中，不管你做什么，用户的需求肯定会变。行为参数化是可以帮助你处理频繁变更的需求的一种软件开发模式。<br>比方说：<em>有个程序是帮助农民了解自己的库存的。农民想有个查找库存中绿色苹果的功能</em>，于是，有了下面的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static List&lt;Apple&gt; filterGreenApples(List&lt;Apple&gt; apples) &#123;</span><br><span class="line">        List&lt;Apple&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        for (Apple apple : apples) &#123;</span><br><span class="line">            if (&quot;green&quot;.equals(apple.getColor())) &#123;</span><br><span class="line">                result.add(apple);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>现在<em>农民改注意了，他还想要筛选红苹果</em>，为了适应变化，你对方法你增加了一个参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static List&lt;Apple&gt; filterApplesByColor(List&lt;Apple&gt; apples,String color) &#123;</span><br><span class="line">        List&lt;Apple&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        for (Apple apple : apples) &#123;</span><br><span class="line">            if (color.equals(apple.getColor())) &#123;</span><br><span class="line">                result.add(apple);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>一切看起来完美，<em>但是农民又需要区分轻苹果和重苹果。重的苹果一般大于150克</em>。于是，你添加了一个这样的功能，为了适应他对重轻的改变，你特意的将<code>weight</code>作为可变参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static List&lt;Apple&gt; filterApplesByWeight(List&lt;Apple&gt; apples,int weight) &#123;</span><br><span class="line">        List&lt;Apple&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        for (Apple apple : apples) &#123;</span><br><span class="line">            if (apple.getWeight() &gt; weight) &#123;</span><br><span class="line">                result.add(apple);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>解决方式不错，但请注意，你复制了大部分的代码来实现遍历库存，并对每个苹果应用筛选条件。如果你要<em>改变筛选遍历方式来提升性能呢？</em>那就得修改所有方法的实现，这代价太大了。于是你考虑将你能想到的每个属性的筛选整合到一个<code>filterApples</code>方法里，于是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public static List&lt;Apple&gt; filterApples(List&lt;Apple&gt; apples, String color, int weight, int index) &#123;</span><br><span class="line">        List&lt;Apple&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        for (Apple apple : apples) &#123;</span><br><span class="line">            switch (index) &#123;</span><br><span class="line">                case 1:</span><br><span class="line">                    if (color.equals(apple.getColor())) &#123;</span><br><span class="line">                        result.add(apple);</span><br><span class="line">                    &#125; break;</span><br><span class="line">                case 2:</span><br><span class="line">                    if (apple.getWeight() &gt; weight) &#123;</span><br><span class="line">                        result.add(apple);</span><br><span class="line">                    &#125; break;</span><br><span class="line">                case 12:</span><br><span class="line">                    if (color.equals(apple.getColor()) &amp;&amp; apple.getWeight() &gt; weight) &#123;</span><br><span class="line">                        result.add(apple);</span><br><span class="line">                    &#125; break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>然而这种解决方案再差不过了！你需要理解index的全部意义才能准确使用，而且随着需求的增加如大小、形状、产地的筛选，<code>filterApples</code>将变成一个巨大的非常复杂的方法，这给后期的维护带了很大的麻烦。</p>
-<h4 id="行为参数化第一次尝试，抽象化"><a href="#行为参数化第一次尝试，抽象化" class="headerlink" title="行为参数化第一次尝试，抽象化"></a>行为参数化第一次尝试，抽象化</h4><p>为了改变上面的不友好的设计，我们对筛选标准进行建模：农民考虑的是筛选苹果，如何筛选他不关心。因此我们定义一个接口来对如筛选行为进行建模。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface AppleFilter &#123;</span><br><span class="line">    boolean filter(Apple apple);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>现在我们可以用AppleFilter的不同实现来选择不同的筛选标准了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class AppleGreenFilter implements AppleFilter &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean filter(Apple apple) &#123;</span><br><span class="line">        return &quot;green&quot;.equals(apple.getColor());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>同时我们根据苹果属性筛选苹果的<code>filterApples</code>方法也可以改成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static List&lt;Apple&gt; filterApples(List&lt;Apple&gt; apples, AppleFilter filter) &#123;</span><br><span class="line">        assert filter != null;</span><br><span class="line">        List&lt;Apple&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        for (Apple apple : apples) &#123;</span><br><span class="line">            if (filter.filter(apple)) &#123;</span><br><span class="line">                result.add(apple);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>这里值得停下来庆祝一下了。这段代码比我们之前的整合灵活多了，读起来、用起来也更容易。现在你可以创建不同的<code>AppleFilter</code>对象，来写出复合农民的任何筛选需求了。<code>filterApples</code>方法的行为取决于你通过<code>AppleFilter</code>对象传递的代码。话句话说，你把<code>filterApples</code>方法的行为参数化了！</p>
-<h4 id="行为参数化第二次尝试，匿名类"><a href="#行为参数化第二次尝试，匿名类" class="headerlink" title="行为参数化第二次尝试，匿名类"></a>行为参数化第二次尝试，匿名类</h4><p>为了传递不同的筛选行为，我们不得不声明N多的<code>AppleFilter</code>接口的类。为了更加简洁易用，我们可以使用匿名类来声明和实例化一个类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Apple&gt; result = filterApples(apples, new AppleFilter() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public boolean filter(Apple apple) &#123;</span><br><span class="line">                return &quot;red&quot;.equals(apple.getColor());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
-<p>但是匿名类不够好，它往往很笨重，占用很多空间。如果行为经常使用，倒不如声明接口的类。</p>
-<h4 id="行为参数化第二次尝试，Lambda"><a href="#行为参数化第二次尝试，Lambda" class="headerlink" title="行为参数化第二次尝试，Lambda"></a>行为参数化第二次尝试，Lambda</h4><p>现在有了更好的解决方式，我们使用Java8提供的Lambda表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Apple&gt; result = filterApples(apples, (Apple a) -&gt; &quot;red&quot;.equals(a.getColor()));</span><br></pre></td></tr></table></figure></p>
-<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>Lambda表达式可以理解为简洁地表示可传递的匿名函数的一种方式。</p>
-<h4 id="Lambda表达式语法"><a href="#Lambda表达式语法" class="headerlink" title="Lambda表达式语法"></a>Lambda表达式语法</h4><p>Lambda表达式有三个部分：</p>
-<ul>
-<li>参数列表</li>
-<li>箭头-箭头-&gt;把参数列表与Lambda主体隔开</li>
-<li>Lambda主体</li>
-</ul>
-<p>其基本语法是 <code>(parameters) -&gt; expression</code> 或 <code>(parameters) -&gt; {statements;}</code><br>比如 <code>() -&gt; &quot;abc&quot;</code>，<code>(int a) -&gt; {return a+1;}</code></p>
-<h4 id="Lambda基本概念"><a href="#Lambda基本概念" class="headerlink" title="Lambda基本概念"></a>Lambda基本概念</h4><ul>
-<li>函数式接口 ： 只定义一个抽象方法的接口（Java8接口可以包含默认方法）；</li>
-<li>函数描述符 ： 函数式接口的抽象方法签名叫做函数描述符</li>
-<li>函数式接口声明 ： @FunctionalInterface</li>
-</ul>
-<h4 id="Lambda内置函数式接口"><a href="#Lambda内置函数式接口" class="headerlink" title="Lambda内置函数式接口"></a>Lambda内置函数式接口</h4><p>Java8的库中已经包含了大部分常用的函数式接口，我们可以直接使用；具体位置在<code>java.util.function</code>包下。</p>
-<ul>
-<li>Predicate<t><blockquote>
-<p>函数描述符：T-&gt;Boolean</p>
-</blockquote>
-</t></li>
-</ul>
-
-          
         
       
     </div>
@@ -1459,6 +1299,163 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/15/Github+Hexo搭建个人博客/" itemprop="url">
+                  Github+Hexo搭建个人博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-15T23:10:04+08:00" content="2016-05-15">
+              2016-05-15
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/15/Github+Hexo搭建个人博客/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/15/Github+Hexo搭建个人博客/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/15/Github+Hexo搭建个人博客/" class="leancloud_visitors" data-flag-title="Github+Hexo搭建个人博客">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>想搭建个人博客，Github+Hexo是个不错的选择。</p>
+<h3 id="为什么选择Github-Hexo"><a href="#为什么选择Github-Hexo" class="headerlink" title="为什么选择Github+Hexo"></a>为什么选择Github+Hexo</h3><ul>
+<li>Git - 最先进的开源分布式版本控制系统</li>
+<li><p>GitHub - 全球最大的社交编程及代码托管网站</p>
+<ul>
+<li>Github Pages - Github提供的<strong>免费</strong>的静态站点，Github pages具备两种模式：<br>  1 User/Organization Pages个人或公司站点<br>  2 Project Pages项目站点</li>
+</ul>
+</li>
+<li><p>Hexo快速、简洁且高效的博客框架 </p>
+<ul>
+<li>急速生成页面</li>
+<li>支持Markdown</li>
+<li>一键部署博客</li>
+<li>丰富的插件、主题支持</li>
+</ul>
+</li>
+</ul>
+<h3 id="创建Github-Pages"><a href="#创建Github-Pages" class="headerlink" title="创建Github Pages"></a>创建Github Pages</h3><ol>
+<li>Github网站注册账号</li>
+<li>创建仓库username.github.io   </li>
+</ol>
+<blockquote>
+<p>需要注意，新建仓库名称必须符合标准要求，username为Github账号的用户名称，建立成功之后，Github会自动将识别此仓库为Github Pages站点</p>
+</blockquote>
+<h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><blockquote>
+<p>以下为Mac环境操作记录，个别安装请根据自己系统调整</p>
+</blockquote>
+<h4 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h4><ul>
+<li><p>安装依赖软件</p>
+<ul>
+<li><p>Node.js ( 含npm )</p>
+<p>  <code>$ brew install node</code></p>
+</li>
+<li><p>Git</p>
+<p>  <code>$ brew install git</code></p>
+</li>
+</ul>
+</li>
+<li><p>安装Hexo   </p>
+<p>  <code>$ sudo npm install hexo-cli -g</code>    </p>
+<blockquote>
+<p>Linux / OS X 系统下需要 sudo 管理员安装，否则会出现以下错误。如果出现可以尝试 <strong>npm install hexo –no-optional</strong> 安装解决。但此错误并不影响Hexo正常使用。</p>
+</blockquote>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [Error: Cannot find module &apos;./build/Release/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;    </span><br><span class="line">&#123; [Error: Cannot find module &apos;./build/default/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</span><br><span class="line">&#123; [Error: Cannot find module &apos;./build/Debug/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/15/Github+Hexo搭建个人博客/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/15/Git命令拾遗/" itemprop="url">
                   Git学习笔记 - 命令拾遗
                 </a>
@@ -1617,8 +1614,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/15/Github+Hexo搭建个人博客/" itemprop="url">
-                  Github+Hexo搭建个人博客
+                <a class="post-title-link" href="/2016/05/14/Java SPI机制梳理/" itemprop="url">
+                  Java SPI机制梳理
                 </a>
               
             
@@ -1631,19 +1628,38 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-15T23:10:04+08:00" content="2016-05-15">
-              2016-05-15
+            <time itemprop="dateCreated" datetime="2016-05-14T12:43:41+08:00" content="2016-05-14">
+              2016-05-14
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/15/Github+Hexo搭建个人博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/15/Github+Hexo搭建个人博客/" itemprop="commentsCount"></span>
+                <a href="/2016/05/14/Java SPI机制梳理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/Java SPI机制梳理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1653,7 +1669,7 @@
 
           
           
-             <span id="/2016/05/15/Github+Hexo搭建个人博客/" class="leancloud_visitors" data-flag-title="Github+Hexo搭建个人博客">
+             <span id="/2016/05/14/Java SPI机制梳理/" class="leancloud_visitors" data-flag-title="Java SPI机制梳理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1676,54 +1692,15 @@
 
       
         
-          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>想搭建个人博客，Github+Hexo是个不错的选择。</p>
-<h3 id="为什么选择Github-Hexo"><a href="#为什么选择Github-Hexo" class="headerlink" title="为什么选择Github+Hexo"></a>为什么选择Github+Hexo</h3><ul>
-<li>Git - 最先进的开源分布式版本控制系统</li>
-<li><p>GitHub - 全球最大的社交编程及代码托管网站</p>
-<ul>
-<li>Github Pages - Github提供的<strong>免费</strong>的静态站点，Github pages具备两种模式：<br>  1 User/Organization Pages个人或公司站点<br>  2 Project Pages项目站点</li>
-</ul>
-</li>
-<li><p>Hexo快速、简洁且高效的博客框架 </p>
-<ul>
-<li>急速生成页面</li>
-<li>支持Markdown</li>
-<li>一键部署博客</li>
-<li>丰富的插件、主题支持</li>
-</ul>
-</li>
-</ul>
-<h3 id="创建Github-Pages"><a href="#创建Github-Pages" class="headerlink" title="创建Github Pages"></a>创建Github Pages</h3><ol>
-<li>Github网站注册账号</li>
-<li>创建仓库username.github.io   </li>
-</ol>
-<blockquote>
-<p>需要注意，新建仓库名称必须符合标准要求，username为Github账号的用户名称，建立成功之后，Github会自动将识别此仓库为Github Pages站点</p>
-</blockquote>
-<h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><blockquote>
-<p>以下为Mac环境操作记录，个别安装请根据自己系统调整</p>
-</blockquote>
-<h4 id="Hexo安装"><a href="#Hexo安装" class="headerlink" title="Hexo安装"></a>Hexo安装</h4><ul>
-<li><p>安装依赖软件</p>
-<ul>
-<li><p>Node.js ( 含npm )</p>
-<p>  <code>$ brew install node</code></p>
-</li>
-<li><p>Git</p>
-<p>  <code>$ brew install git</code></p>
-</li>
-</ul>
-</li>
-<li><p>安装Hexo   </p>
-<p>  <code>$ sudo npm install hexo-cli -g</code>    </p>
-<blockquote>
-<p>Linux / OS X 系统下需要 sudo 管理员安装，否则会出现以下错误。如果出现可以尝试 <strong>npm install hexo –no-optional</strong> 安装解决。但此错误并不影响Hexo正常使用。</p>
-</blockquote>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; [Error: Cannot find module &apos;./build/Release/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;    </span><br><span class="line">&#123; [Error: Cannot find module &apos;./build/default/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</span><br><span class="line">&#123; [Error: Cannot find module &apos;./build/Debug/DTraceProviderBindings&apos;] code: &apos;MODULE_NOT_FOUND&apos; &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+          <h3 id="SPI是什么"><a href="#SPI是什么" class="headerlink" title="SPI是什么"></a>SPI是什么</h3><p><strong>SPI</strong> 即<em>Service Provider Interface</em>，是JDK内置的一种服务发现机制。它提供了Java运行时发现添加实现的方式，将实现的装配移到程序外，使得模块之间不对实现进行硬编码，降低耦合实现可插拔。   </p>
+<h3 id="SPI具体约定"><a href="#SPI具体约定" class="headerlink" title="SPI具体约定"></a>SPI具体约定</h3><p>SPI的具体约定：当服务的提供者，提供了服务接口的一种实现之后，在jar包的META-INF/services/目录里同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当外部程序装配这个模块的时候，就能通过该jar包META-INF/services/里的配置文件找到具体的实现类名，并装载实例化，完成模块的注入。 基于这样一个约定就能很好的找到服务接口的实现类，而不需要再代码里指定。jdk提供服务实现查找的一个工具类：java.util.ServiceLoader。      </p>
+<h3 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h3><p>参考下图我们写一个简单的SPI示例：<br><img src="http://o7ar2k9lr.bkt.clouddn.com/java_spi.png" alt="Java SPI"> </p>
+<p><strong>接口IHello</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> demo.spi;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** </span><br><span class="line">* <span class="doctag">@author</span> &lt;a href="mailto:bochenlong@163.com target="_blank"&gt;bochenlong&lt;/a&gt;</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IHello</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">whoSayHello</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>接口实现类TextHello/ByteHello</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> demo.spi.impl;</span><br><span class="line"><span class="keyword">import</span> demo.spi.IHello;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">* <span class="doctag">@author</span> &lt;a href="mailto:bochenlong@163.com" target="_blank"&gt;bochenlong&lt;/a&gt;</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ByteHello</span> <span class="keyword">implements</span> <span class="title">IHello</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whoSayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"ByteHello say hello"</span>);</span><br><span class="line">    &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/15/Github+Hexo搭建个人博客/#more" rel="contents">
+            <a class="btn" href="/2016/05/14/Java SPI机制梳理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1756,10 +1733,6 @@
   </section>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
 
 
           </div>
@@ -1798,7 +1771,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1815,7 +1788,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

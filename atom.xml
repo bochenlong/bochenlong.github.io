@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bochenlong.github.io/"/>
-  <updated>2016-08-18T08:07:23.050Z</updated>
+  <updated>2016-08-18T08:18:31.048Z</updated>
   <id>http://bochenlong.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>JAVA8-Stream</title>
-    <link href="http://bochenlong.github.io/2016/08/18/JAVA8-Stream/"/>
-    <id>http://bochenlong.github.io/2016/08/18/JAVA8-Stream/</id>
+    <title>JAVA8-Stream整理</title>
+    <link href="http://bochenlong.github.io/2016/08/18/JAVA8-Stream%E6%95%B4%E7%90%86/"/>
+    <id>http://bochenlong.github.io/2016/08/18/JAVA8-Stream整理/</id>
     <published>2016-08-18T08:04:21.000Z</published>
-    <updated>2016-08-18T08:07:23.050Z</updated>
+    <updated>2016-08-18T08:18:31.048Z</updated>
     
     <content type="html">&lt;h3 id=&quot;JAVA8-Stream&quot;&gt;&lt;a href=&quot;#JAVA8-Stream&quot; class=&quot;headerlink&quot; title=&quot;JAVA8-Stream&quot;&gt;&lt;/a&gt;JAVA8-Stream&lt;/h3&gt;&lt;p&gt;流是JAVA8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。&lt;/p&gt;
 &lt;h3 id=&quot;构建流&quot;&gt;&lt;a href=&quot;#构建流&quot; class=&quot;headerlink&quot; title=&quot;构建流&quot;&gt;&lt;/a&gt;构建流&lt;/h3&gt;&lt;ol&gt;
@@ -127,62 +127,6 @@
       <category term="Java8" scheme="http://bochenlong.github.io/tags/Java8/"/>
     
       <category term="Stream" scheme="http://bochenlong.github.io/tags/Stream/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java8-Lambda</title>
-    <link href="http://bochenlong.github.io/2016/06/30/Java8-Lambda/"/>
-    <id>http://bochenlong.github.io/2016/06/30/Java8-Lambda/</id>
-    <published>2016-06-30T01:10:23.000Z</published>
-    <updated>2016-06-30T05:49:41.130Z</updated>
-    
-    <content type="html">&lt;h3 id=&quot;行为参数化&quot;&gt;&lt;a href=&quot;#行为参数化&quot; class=&quot;headerlink&quot; title=&quot;行为参数化&quot;&gt;&lt;/a&gt;行为参数化&lt;/h3&gt;&lt;p&gt;在软件工程中，不管你做什么，用户的需求肯定会变。行为参数化是可以帮助你处理频繁变更的需求的一种软件开发模式。&lt;br&gt;比方说：&lt;em&gt;有个程序是帮助农民了解自己的库存的。农民想有个查找库存中绿色苹果的功能&lt;/em&gt;，于是，有了下面的方法&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public static List&amp;lt;Apple&amp;gt; filterGreenApples(List&amp;lt;Apple&amp;gt; apples) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        List&amp;lt;Apple&amp;gt; result = new ArrayList&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        for (Apple apple : apples) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            if (&amp;quot;green&amp;quot;.equals(apple.getColor())) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                result.add(apple);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return result;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;现在&lt;em&gt;农民改注意了，他还想要筛选红苹果&lt;/em&gt;，为了适应变化，你对方法你增加了一个参数&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public static List&amp;lt;Apple&amp;gt; filterApplesByColor(List&amp;lt;Apple&amp;gt; apples,String color) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        List&amp;lt;Apple&amp;gt; result = new ArrayList&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        for (Apple apple : apples) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            if (color.equals(apple.getColor())) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                result.add(apple);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return result;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;一切看起来完美，&lt;em&gt;但是农民又需要区分轻苹果和重苹果。重的苹果一般大于150克&lt;/em&gt;。于是，你添加了一个这样的功能，为了适应他对重轻的改变，你特意的将&lt;code&gt;weight&lt;/code&gt;作为可变参数&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public static List&amp;lt;Apple&amp;gt; filterApplesByWeight(List&amp;lt;Apple&amp;gt; apples,int weight) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        List&amp;lt;Apple&amp;gt; result = new ArrayList&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        for (Apple apple : apples) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            if (apple.getWeight() &amp;gt; weight) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                result.add(apple);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return result;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;解决方式不错，但请注意，你复制了大部分的代码来实现遍历库存，并对每个苹果应用筛选条件。如果你要&lt;em&gt;改变筛选遍历方式来提升性能呢？&lt;/em&gt;那就得修改所有方法的实现，这代价太大了。于是你考虑将你能想到的每个属性的筛选整合到一个&lt;code&gt;filterApples&lt;/code&gt;方法里，于是&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public static List&amp;lt;Apple&amp;gt; filterApples(List&amp;lt;Apple&amp;gt; apples, String color, int weight, int index) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        List&amp;lt;Apple&amp;gt; result = new ArrayList&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        for (Apple apple : apples) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            switch (index) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                case 1:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    if (color.equals(apple.getColor())) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        result.add(apple);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125; break;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                case 2:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    if (apple.getWeight() &amp;gt; weight) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        result.add(apple);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125; break;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                case 12:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    if (color.equals(apple.getColor()) &amp;amp;&amp;amp; apple.getWeight() &amp;gt; weight) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                        result.add(apple);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                    &amp;#125; break;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return result;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;然而这种解决方案再差不过了！你需要理解index的全部意义才能准确使用，而且随着需求的增加如大小、形状、产地的筛选，&lt;code&gt;filterApples&lt;/code&gt;将变成一个巨大的非常复杂的方法，这给后期的维护带了很大的麻烦。&lt;/p&gt;
-&lt;h4 id=&quot;行为参数化第一次尝试，抽象化&quot;&gt;&lt;a href=&quot;#行为参数化第一次尝试，抽象化&quot; class=&quot;headerlink&quot; title=&quot;行为参数化第一次尝试，抽象化&quot;&gt;&lt;/a&gt;行为参数化第一次尝试，抽象化&lt;/h4&gt;&lt;p&gt;为了改变上面的不友好的设计，我们对筛选标准进行建模：农民考虑的是筛选苹果，如何筛选他不关心。因此我们定义一个接口来对如筛选行为进行建模。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public interface AppleFilter &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    boolean filter(Apple apple);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;现在我们可以用AppleFilter的不同实现来选择不同的筛选标准了&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public class AppleGreenFilter implements AppleFilter &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    public boolean filter(Apple apple) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return &amp;quot;green&amp;quot;.equals(apple.getColor());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;同时我们根据苹果属性筛选苹果的&lt;code&gt;filterApples&lt;/code&gt;方法也可以改成&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;public static List&amp;lt;Apple&amp;gt; filterApples(List&amp;lt;Apple&amp;gt; apples, AppleFilter filter) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        assert filter != null;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        List&amp;lt;Apple&amp;gt; result = new ArrayList&amp;lt;&amp;gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        for (Apple apple : apples) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            if (filter.filter(apple)) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                result.add(apple);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        return result;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这里值得停下来庆祝一下了。这段代码比我们之前的整合灵活多了，读起来、用起来也更容易。现在你可以创建不同的&lt;code&gt;AppleFilter&lt;/code&gt;对象，来写出复合农民的任何筛选需求了。&lt;code&gt;filterApples&lt;/code&gt;方法的行为取决于你通过&lt;code&gt;AppleFilter&lt;/code&gt;对象传递的代码。话句话说，你把&lt;code&gt;filterApples&lt;/code&gt;方法的行为参数化了！&lt;/p&gt;
-&lt;h4 id=&quot;行为参数化第二次尝试，匿名类&quot;&gt;&lt;a href=&quot;#行为参数化第二次尝试，匿名类&quot; class=&quot;headerlink&quot; title=&quot;行为参数化第二次尝试，匿名类&quot;&gt;&lt;/a&gt;行为参数化第二次尝试，匿名类&lt;/h4&gt;&lt;p&gt;为了传递不同的筛选行为，我们不得不声明N多的&lt;code&gt;AppleFilter&lt;/code&gt;接口的类。为了更加简洁易用，我们可以使用匿名类来声明和实例化一个类。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;List&amp;lt;Apple&amp;gt; result = filterApples(apples, new AppleFilter() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            @Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            public boolean filter(Apple apple) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                return &amp;quot;red&amp;quot;.equals(apple.getColor());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;但是匿名类不够好，它往往很笨重，占用很多空间。如果行为经常使用，倒不如声明接口的类。&lt;/p&gt;
-&lt;h4 id=&quot;行为参数化第二次尝试，Lambda&quot;&gt;&lt;a href=&quot;#行为参数化第二次尝试，Lambda&quot; class=&quot;headerlink&quot; title=&quot;行为参数化第二次尝试，Lambda&quot;&gt;&lt;/a&gt;行为参数化第二次尝试，Lambda&lt;/h4&gt;&lt;p&gt;现在有了更好的解决方式，我们使用Java8提供的Lambda表达式：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;List&amp;lt;Apple&amp;gt; result = filterApples(apples, (Apple a) -&amp;gt; &amp;quot;red&amp;quot;.equals(a.getColor()));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Lambda表达式&quot;&gt;&lt;a href=&quot;#Lambda表达式&quot; class=&quot;headerlink&quot; title=&quot;Lambda表达式&quot;&gt;&lt;/a&gt;Lambda表达式&lt;/h3&gt;&lt;p&gt;Lambda表达式可以理解为简洁地表示可传递的匿名函数的一种方式。&lt;/p&gt;
-&lt;h4 id=&quot;Lambda表达式语法&quot;&gt;&lt;a href=&quot;#Lambda表达式语法&quot; class=&quot;headerlink&quot; title=&quot;Lambda表达式语法&quot;&gt;&lt;/a&gt;Lambda表达式语法&lt;/h4&gt;&lt;p&gt;Lambda表达式有三个部分：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;参数列表&lt;/li&gt;
-&lt;li&gt;箭头-箭头-&amp;gt;把参数列表与Lambda主体隔开&lt;/li&gt;
-&lt;li&gt;Lambda主体&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;其基本语法是 &lt;code&gt;(parameters) -&amp;gt; expression&lt;/code&gt; 或 &lt;code&gt;(parameters) -&amp;gt; {statements;}&lt;/code&gt;&lt;br&gt;比如 &lt;code&gt;() -&amp;gt; &amp;quot;abc&amp;quot;&lt;/code&gt;，&lt;code&gt;(int a) -&amp;gt; {return a+1;}&lt;/code&gt;&lt;/p&gt;
-&lt;h4 id=&quot;Lambda基本概念&quot;&gt;&lt;a href=&quot;#Lambda基本概念&quot; class=&quot;headerlink&quot; title=&quot;Lambda基本概念&quot;&gt;&lt;/a&gt;Lambda基本概念&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;函数式接口 ： 只定义一个抽象方法的接口（Java8接口可以包含默认方法）；&lt;/li&gt;
-&lt;li&gt;函数描述符 ： 函数式接口的抽象方法签名叫做函数描述符&lt;/li&gt;
-&lt;li&gt;函数式接口声明 ： @FunctionalInterface&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;Lambda内置函数式接口&quot;&gt;&lt;a href=&quot;#Lambda内置函数式接口&quot; class=&quot;headerlink&quot; title=&quot;Lambda内置函数式接口&quot;&gt;&lt;/a&gt;Lambda内置函数式接口&lt;/h4&gt;&lt;p&gt;Java8的库中已经包含了大部分常用的函数式接口，我们可以直接使用；具体位置在&lt;code&gt;java.util.function&lt;/code&gt;包下。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Predicate&lt;t&gt;&lt;blockquote&gt;
-&lt;p&gt;函数描述符：T-&amp;gt;Boolean&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/t&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;行为参数化&quot;&gt;&lt;a href=&quot;#行为参数化&quot; class=&quot;headerlink&quot; title=&quot;行为参数化&quot;&gt;&lt;/a&gt;行为参数化&lt;/h3&gt;&lt;p&gt;在软件工程中，不管你做什么，用户的需求肯定会变。行为参数化是可以帮助你处理频繁变更的需求的一种软件开发模式。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Java" scheme="http://bochenlong.github.io/categories/Java/"/>
-    
-    
-      <category term="Java8" scheme="http://bochenlong.github.io/tags/Java8/"/>
-    
-      <category term="Lambda" scheme="http://bochenlong.github.io/tags/Lambda/"/>
     
   </entry>
   
@@ -1183,125 +1127,6 @@ mongod --shutdown&lt;/code&gt;&lt;/p&gt;
   </entry>
   
   <entry>
-    <title>Git学习笔记 - 命令拾遗</title>
-    <link href="http://bochenlong.github.io/2016/05/15/Git%E5%91%BD%E4%BB%A4%E6%8B%BE%E9%81%97/"/>
-    <id>http://bochenlong.github.io/2016/05/15/Git命令拾遗/</id>
-    <published>2016-05-15T15:10:04.000Z</published>
-    <updated>2016-05-24T04:45:12.411Z</updated>
-    
-    <content type="html">&lt;blockquote&gt;
-&lt;p&gt;查看Git版本   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git --version&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;初始化仓库   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git init&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;远程仓库   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git remote -v&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git remote add origin git@github.com:bochenlong/study-demo.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git remote remove origin // 取消关联&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;提交到暂存区   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git add 1.txt ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git add ./&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;提交到版本库&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git commit -m &amp;quot;add the README.md&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git commit ./1.txt -m &amp;quot;modify 1.txt&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git commit ./ -m &amp;quot;modify 1.txt&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;查看仓库当前状态&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git status&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;对比文件&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git diff 1.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;blockquote&gt;
-&lt;p&gt;查看Git日志&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git log --pretty=oneline&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git log 1.txt ./&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git log --graph --pretty=oneline --abbrev-commit //查看分支合并图&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;还原文件   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git reset --hard HEAD^&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// HEAD^上一个版本 HEAD^^上上一个版本 HEAD~100上100个版本 &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git reset --hart commitid&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git reset HEAD 1.txt   // 还原版本信息，配合git checkout -- 1.txt可还原已删除文件&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;查看Git commit日志&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git relog&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;检出   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git checkout -- filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// 一种是file自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一样的状态；&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// 一种是file已添加到暂存区后，做了修改，现在，撤销修改就回到添加到暂存区后的状态；&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git checkout -b dev // 创建且检出切换到dev分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git checkout dev // 检出切换到dev分支&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;删除暂存区&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git rm file.txt ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git rm ./*&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;仓库推送到远程端   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git push orign master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;首次关联远程仓库： git push -u --force orign master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git push origin :dev // 删除远程分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git push origin tagid // 推送标签到远程&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git push origin --tags // 推送全部未推送到远程的本地标签&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git push origin :refs/tags/v0.9 // 删除远程标签&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;克隆&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git clone git@github.com:bochenlong/study-demo.git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;分支操作&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git branch // 查看当前分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git branch dev // 新建分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git branch -d dev  // 删除分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git branch -D dev // 强制删除分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git merge dev // dev合并到当前分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git branch --set-upstream branch-name origin/branch-name &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// 本地分支与远程分支关联&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;储藏&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git stash //储藏当前工作区&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git stash list //查看储藏列表&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git stash apply stashid //恢复工作区&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git stash drop stashid //删除储存内容&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git stash pop //恢复工作区同事删除存储内容&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;更新本地库&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git pull&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;标签&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git tag v1.0 // 打标签&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git tag v0.9 commitid // 指定节点打标签&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git tag -a v0.9 -m &amp;apos;version 0.9&amp;apos; commitid // 指定标签、描述&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git tag // 查看标签&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git show tagid // 查看标签信息&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git tag -d v0.9 // 删除标签&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;查看Git版本   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git --version&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;初始化仓库   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git init&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;远程仓库   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git remote -v&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git remote add origin git@github.com:bochenlong/study-demo.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git remote remove origin // 取消关联&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;提交到暂存区   &lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git add 1.txt ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git add ./&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;提交到版本库&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git commit -m &amp;quot;add the README.md&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git commit ./1.txt -m &amp;quot;modify 1.txt&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git commit ./ -m &amp;quot;modify 1.txt&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;查看仓库当前状态&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git status&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;blockquote&gt;
-&lt;p&gt;对比文件&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git diff 1.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="Git" scheme="http://bochenlong.github.io/categories/Git/"/>
-    
-    
-      <category term="Git" scheme="http://bochenlong.github.io/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Github+Hexo搭建个人博客</title>
     <link href="http://bochenlong.github.io/2016/05/15/Github+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
     <id>http://bochenlong.github.io/2016/05/15/Github+Hexo搭建个人博客/</id>
@@ -1482,6 +1307,125 @@ mongod --shutdown&lt;/code&gt;&lt;/p&gt;
       <category term="Hexo" scheme="http://bochenlong.github.io/tags/Hexo/"/>
     
       <category term="NexT" scheme="http://bochenlong.github.io/tags/NexT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git学习笔记 - 命令拾遗</title>
+    <link href="http://bochenlong.github.io/2016/05/15/Git%E5%91%BD%E4%BB%A4%E6%8B%BE%E9%81%97/"/>
+    <id>http://bochenlong.github.io/2016/05/15/Git命令拾遗/</id>
+    <published>2016-05-15T15:10:04.000Z</published>
+    <updated>2016-05-24T04:45:12.411Z</updated>
+    
+    <content type="html">&lt;blockquote&gt;
+&lt;p&gt;查看Git版本   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git --version&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;初始化仓库   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git init&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;远程仓库   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git remote -v&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git remote add origin git@github.com:bochenlong/study-demo.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git remote remove origin // 取消关联&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提交到暂存区   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git add 1.txt ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git add ./&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提交到版本库&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git commit -m &amp;quot;add the README.md&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git commit ./1.txt -m &amp;quot;modify 1.txt&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git commit ./ -m &amp;quot;modify 1.txt&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;查看仓库当前状态&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git status&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对比文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git diff 1.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;blockquote&gt;
+&lt;p&gt;查看Git日志&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git log --pretty=oneline&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git log 1.txt ./&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git log --graph --pretty=oneline --abbrev-commit //查看分支合并图&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;还原文件   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git reset --hard HEAD^&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// HEAD^上一个版本 HEAD^^上上一个版本 HEAD~100上100个版本 &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git reset --hart commitid&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git reset HEAD 1.txt   // 还原版本信息，配合git checkout -- 1.txt可还原已删除文件&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;查看Git commit日志&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git relog&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;检出   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git checkout -- filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// 一种是file自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一样的状态；&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// 一种是file已添加到暂存区后，做了修改，现在，撤销修改就回到添加到暂存区后的状态；&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git checkout -b dev // 创建且检出切换到dev分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git checkout dev // 检出切换到dev分支&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;删除暂存区&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git rm file.txt ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git rm ./*&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;仓库推送到远程端   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git push orign master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;首次关联远程仓库： git push -u --force orign master&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git push origin :dev // 删除远程分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git push origin tagid // 推送标签到远程&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git push origin --tags // 推送全部未推送到远程的本地标签&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git push origin :refs/tags/v0.9 // 删除远程标签&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;克隆&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git clone git@github.com:bochenlong/study-demo.git&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;分支操作&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git branch // 查看当前分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git branch dev // 新建分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git branch -d dev  // 删除分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git branch -D dev // 强制删除分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git merge dev // dev合并到当前分支&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git branch --set-upstream branch-name origin/branch-name &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;// 本地分支与远程分支关联&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;储藏&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git stash //储藏当前工作区&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git stash list //查看储藏列表&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git stash apply stashid //恢复工作区&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git stash drop stashid //删除储存内容&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git stash pop //恢复工作区同事删除存储内容&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;更新本地库&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git pull&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;标签&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git tag v1.0 // 打标签&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git tag v0.9 commitid // 指定节点打标签&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git tag -a v0.9 -m &amp;apos;version 0.9&amp;apos; commitid // 指定标签、描述&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git tag // 查看标签&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git show tagid // 查看标签信息&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git tag -d v0.9 // 删除标签&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;查看Git版本   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git --version&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;初始化仓库   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git init&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;远程仓库   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git remote -v&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git remote add origin git@github.com:bochenlong/study-demo.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git remote remove origin // 取消关联&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提交到暂存区   &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git add 1.txt ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git add ./&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提交到版本库&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git commit -m &amp;quot;add the README.md&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git commit ./1.txt -m &amp;quot;modify 1.txt&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;~ git commit ./ -m &amp;quot;modify 1.txt&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;查看仓库当前状态&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git status&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对比文件&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;~ git diff 1.txt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="Git" scheme="http://bochenlong.github.io/categories/Git/"/>
+    
+    
+      <category term="Git" scheme="http://bochenlong.github.io/tags/Git/"/>
     
   </entry>
   
