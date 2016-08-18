@@ -89,7 +89,7 @@
 <meta name="description" content="唯有努力不负人！">
 <meta property="og:type" content="website">
 <meta property="og:title" content="薄小破">
-<meta property="og:url" content="http://bochenlong.github.io/tags/ClassLoader/index.html">
+<meta property="og:url" content="http://bochenlong.github.io/page/2/index.html">
 <meta property="og:site_name" content="薄小破">
 <meta property="og:description" content="唯有努力不负人！">
 <meta name="twitter:card" content="summary">
@@ -112,7 +112,7 @@
   };
 </script>
 
-  <title> 标签: ClassLoader | 薄小破 </title>
+  <title> 薄小破 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -133,7 +133,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -250,47 +252,152 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        ClassLoader
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <section id="posts" class="posts-expand">
     
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
 
-      <h1 class="post-title">
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2016/05/19/Java类加载梳理/" itemprop="url">
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
               
-                <span itemprop="name">Java类加载器梳理</span>
+                
+                <a class="post-title-link" href="/2016/05/14/Java SPI机制梳理/" itemprop="url">
+                  Java SPI机制梳理
+                </a>
               
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-14T12:43:41+08:00" content="2016-05-14">
+              2016-05-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/14/Java SPI机制梳理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/Java SPI机制梳理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/14/Java SPI机制梳理/" class="leancloud_visitors" data-flag-title="Java SPI机制梳理">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="SPI是什么"><a href="#SPI是什么" class="headerlink" title="SPI是什么"></a>SPI是什么</h3><p><strong>SPI</strong> 即<em>Service Provider Interface</em>，是JDK内置的一种服务发现机制。它提供了Java运行时发现添加实现的方式，将实现的装配移到程序外，使得模块之间不对实现进行硬编码，降低耦合实现可插拔。   </p>
+<h3 id="SPI具体约定"><a href="#SPI具体约定" class="headerlink" title="SPI具体约定"></a>SPI具体约定</h3><p>SPI的具体约定：当服务的提供者，提供了服务接口的一种实现之后，在jar包的META-INF/services/目录里同时创建一个以服务接口命名的文件。该文件里就是实现该服务接口的具体实现类。而当外部程序装配这个模块的时候，就能通过该jar包META-INF/services/里的配置文件找到具体的实现类名，并装载实例化，完成模块的注入。 基于这样一个约定就能很好的找到服务接口的实现类，而不需要再代码里指定。jdk提供服务实现查找的一个工具类：java.util.ServiceLoader。      </p>
+<h3 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h3><p>参考下图我们写一个简单的SPI示例：<br><img src="http://o7ar2k9lr.bkt.clouddn.com/java_spi.png" alt="Java SPI"> </p>
+<p><strong>接口IHello</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> demo.spi;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** </span><br><span class="line">* <span class="doctag">@author</span> &lt;a href="mailto:bochenlong@163.com target="_blank"&gt;bochenlong&lt;/a&gt;</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IHello</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">whoSayHello</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>接口实现类TextHello/ByteHello</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> demo.spi.impl;</span><br><span class="line"><span class="keyword">import</span> demo.spi.IHello;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line">* <span class="doctag">@author</span> &lt;a href="mailto:bochenlong@163.com" target="_blank"&gt;bochenlong&lt;/a&gt;</span><br><span class="line">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ByteHello</span> <span class="keyword">implements</span> <span class="title">IHello</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whoSayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"ByteHello say hello"</span>);</span><br><span class="line">    &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/14/Java SPI机制梳理/#more" rel="contents">
+              阅读全文 &raquo;
             </a>
+          </div>
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-19T20:22:10+08:00"
-              content="2016-05-19" >
-          05-19
-        </time>
-      </div>
+    <div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
     
-  </div>
+  </section>
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -516,7 +623,7 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'bochenlong';
-      var disqus_identifier = 'tags/ClassLoader/index.html';
+      var disqus_identifier = 'page/2/index.html';
       var disqus_title = '';
       var disqus_url = '';
 

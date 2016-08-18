@@ -1,0 +1,1112 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MongoDB," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="薄小破" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="MongoDB索引索引通常能够极大的提高查询的效率，如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中，索引是对数据库表中一列或多列的值进行排序的一种结构。
+语法db.COLLECTION_NAME.ensureIndex({KEY:1,...})
+
+语法中KEY值为你要创建的索引字段，1为指定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB学习笔记03【进阶】">
+<meta property="og:url" content="http://bochenlong.github.io/2016/06/17/MongoDB学习笔记03【进阶】/index.html">
+<meta property="og:site_name" content="薄小破">
+<meta property="og:description" content="MongoDB索引索引通常能够极大的提高查询的效率，如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中，索引是对数据库表中一列或多列的值进行排序的一种结构。
+语法db.COLLECTION_NAME.ensureIndex({KEY:1,...})
+
+语法中KEY值为你要创建的索引字段，1为指定">
+<meta property="og:image" content="http://i.imgur.com/zArMYmD.png">
+<meta property="og:updated_time" content="2016-06-23T03:27:38.032Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MongoDB学习笔记03【进阶】">
+<meta name="twitter:description" content="MongoDB索引索引通常能够极大的提高查询的效率，如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中，索引是对数据库表中一列或多列的值进行排序的一种结构。
+语法db.COLLECTION_NAME.ensureIndex({KEY:1,...})
+
+语法中KEY值为你要创建的索引字段，1为指定">
+<meta name="twitter:image" content="http://i.imgur.com/zArMYmD.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> MongoDB学习笔记03【进阶】 | 薄小破 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">薄小破</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">厚德载物</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'Fy2iX4qVjCz3b2XdrDNe','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MongoDB学习笔记03【进阶】
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-17T09:42:53+08:00" content="2016-06-17">
+              2016-06-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/NoSql/" itemprop="url" rel="index">
+                    <span itemprop="name">NoSql</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/17/MongoDB学习笔记03【进阶】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/06/17/MongoDB学习笔记03【进阶】/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/17/MongoDB学习笔记03【进阶】/" class="leancloud_visitors" data-flag-title="MongoDB学习笔记03【进阶】">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="MongoDB索引"><a href="#MongoDB索引" class="headerlink" title="MongoDB索引"></a>MongoDB索引</h3><p>索引通常能够极大的提高查询的效率，如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中，索引是对数据库表中一列或多列的值进行排序的一种结构。</p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p><code>db.COLLECTION_NAME.ensureIndex({KEY:1,...})</code></p>
+<blockquote>
+<p>语法中KEY值为你要创建的索引字段，1为指定按升序创建索引，-1为按降序。</p>
+</blockquote>
+<p>ensureIndex()接收可选参数，参见列表：<br><a id="more"></a></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>background</td>
+<td>boolean</td>
+<td>建索引过程会阻塞其它数据库操作，background可指定以后台方式创建索引，即增加 “background” 可选参数。 “background” 默认值为false</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>boolean</td>
+<td>建立的索引是否唯一。指定为true创建唯一索引。默认值为false</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>索引的名称。如果未指定，MongoDB的通过连接索引的字段名和排序顺序生成一个索引名称</td>
+</tr>
+<tr>
+<td>dropDups</td>
+<td>boolean</td>
+<td>在建立唯一索引时是否删除重复记录,指定 true 创建唯一索引。默认值为 false</td>
+</tr>
+<tr>
+<td>sparse</td>
+<td>boolean</td>
+<td>对文档中不存在的字段数据不启用索引；这个参数需要特别注意，如果设置为true的话，在索引字段中不会查询出不包含对应字段的文档.。默认值为 false</td>
+</tr>
+<tr>
+<td>expireAfterSeconds</td>
+<td>integer</td>
+<td>指定一个以秒为单位的数值，完成 TTL设定，设定集合的生存时间</td>
+</tr>
+<tr>
+<td>v</td>
+<td>index version</td>
+<td>索引的版本号。默认的索引版本取决于mongod创建索引时运行的版本</td>
+</tr>
+<tr>
+<td>weights</td>
+<td>document</td>
+<td>索引权重值，数值在 1 到 99,999 之间，表示该索引相对于其他索引字段的得分权重。</td>
+</tr>
+<tr>
+<td>default_language</td>
+<td>string</td>
+<td>对于文本索引，该参数决定了停用词及词干和词器的规则的列表。 默认为英语</td>
+</tr>
+<tr>
+<td>language_override</td>
+<td>string</td>
+<td>对于文本索引，该参数指定了包含在文档中的字段名，语言覆盖默认的language，默认值为 language.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p><code>db.user.ensureIndex({name:1},{background:true})</code></p>
+<h3 id="MongoDB聚合"><a href="#MongoDB聚合" class="headerlink" title="MongoDB聚合"></a>MongoDB聚合</h3><p>MongoDB中聚合(aggregate)主要用于处理数据(诸如统计平均值,求和等)，并返回计算后的数据结果。</p>
+<h4 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h4><p><code>db.COLLECTION_NAME.aggregate(AGGREGATE_OPERATION)</code></p>
+<h4 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符"></a>管道操作符</h4><p>管道是由一个个功能节点组成的，这些节点用管道操作符来进行表示。聚合管道以一个集合中的所有文档作为开始，然后这些文档从一个操作节点流向下一个节点 ，每个操作节点对文档做相应的操作。这些操作可能会创建新的文档或者过滤掉一些不符合条件的文档，在管道中可以对文档进行重复操作。</p>
+<p><strong>以下为某班成绩表：</strong></p>
+<blockquote>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a91ef4de94710e10420e&quot;), &quot;name&quot; : &quot;bochenlong&quot;, &quot;team&quot; : &quot;1&quot;, &quot;yuwen&quot; : 121, &quot;shuxue&quot; : 118, &quot;yingyu&quot; : 137, &quot;lizong&quot; : [ 90, 72, 66 ] &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a936f4de94710e10420f&quot;), &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;team&quot; : &quot;2&quot;, &quot;yuwen&quot; : 110, &quot;shuxue&quot; : 128, &quot;yingyu&quot; : 137, &quot;lizong&quot; : [ 80, 92, 77 ] &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a959f4de94710e104210&quot;), &quot;name&quot; : &quot;lisan&quot;, &quot;team&quot; : &quot;3&quot;, &quot;yuwen&quot; : 100, &quot;shuxue&quot; : 108, &quot;yingyu&quot; : 127, &quot;lizong&quot; : [ 70, 62, 88 ] &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a96df4de94710e104211&quot;), &quot;name&quot; : &quot;lisan&quot;, &quot;team&quot; : &quot;3&quot;, &quot;yuwen&quot; : 110, &quot;shuxue&quot; : 112, &quot;yingyu&quot; : 107, &quot;lizong&quot; : [ 90, 92, 68 ] &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a97df4de94710e104212&quot;), &quot;name&quot; : &quot;lisi&quot;, &quot;team&quot; : &quot;3&quot;, &quot;yuwen&quot; : 110, &quot;shuxue&quot; : 112, &quot;yingyu&quot; : 107, &quot;lizong&quot; : [ 90, 92, 68 ] &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a9d4f4de94710e104213&quot;), &quot;name&quot; : &quot;mingren&quot;, &quot;team&quot; : &quot;2&quot;, &quot;yuwen&quot; : 98, &quot;shuxue&quot; : 62, &quot;yingyu&quot; : 55, &quot;lizong&quot; : [ 20, 32, 58 ] &#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="project"><a href="#project" class="headerlink" title="$project"></a>$project</h5><p><strong>数据投影，主要用于重命名、增加和删除字段（默认情况下_id是存在，如果不想显示手动置为0)</strong></p>
+<blockquote>
+<p>示例：输出名称和语文成绩,且语文key声明为yw<br><code>db.score.aggregate({$project:{_id:0,name:1,yw:&#39;$yuwen&#39;}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;yw&quot; : 121 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;yw&quot; : 110 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;yw&quot; : 100 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;yw&quot; : 110 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisi&quot;, &quot;yw&quot; : 110 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;mingren&quot;, &quot;yw&quot; : 98 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="match"><a href="#match" class="headerlink" title="$match"></a>$match</h5><p><strong>过滤操作，筛选符合条件文档，作为下一阶段的输入</strong></p>
+<blockquote>
+<p>示例：输出名称和语文成绩，要求语文成绩大于100<br><code>db.score.aggregate([{$match:{&#39;yuwen&#39;:{$gt:100}}},{$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;yw&#39;:&#39;$yuwen&#39;}}])</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;yw&quot; : 121 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;yw&quot; : 110 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;yw&quot; : 110 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisi&quot;, &quot;yw&quot; : 110 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="limit"><a href="#limit" class="headerlink" title="$limit "></a>$limit <span id="limit"></span></h5><p><strong>限制经过管道的文档数量</strong></p>
+<blockquote>
+<p>示例：获取语文成绩前两名的名字和成绩<br><code>db.score.aggregate({$sort:{&#39;yuwen&#39;:-1}},{$limit:2},{$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;yw&#39;:&#39;$yuwen&#39;}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;yw&quot; : 121 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;yw&quot; : 110 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="skip"><a href="#skip" class="headerlink" title="$skip"></a>$skip</h5><p><strong>从代操作集合开始的位置跳过文档的数目</strong></p>
+<blockquote>
+<p>示例：获取语文成绩第三名第四名的名字和成绩<br><code>db.score.aggregate({$sort:{&#39;yuwen&#39;:-1}},{$skip:2},{$limit:2},{$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;yw&#39;:&#39;$yuwen&#39;}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;yw&quot; : 110 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;yw&quot; : 110 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="unwind"><a href="#unwind" class="headerlink" title="$unwind"></a>$unwind</h5><p><strong>将数组元素拆分为独立字段</strong></p>
+<blockquote>
+<p>示例：获取name:bochenlong的理综各科成绩<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;lizong&#39;:1}},{$match:{&#39;name&#39;:&#39;bochenlong&#39;}},{$unwind:&#39;$lizong&#39;})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;lizong&quot; : 90 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;lizong&quot; : 72 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;lizong&quot; : 66 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="group"><a href="#group" class="headerlink" title="$group "></a>$group <span id="group"></span></h5><p><strong>对数据进行分组</strong></p>
+<blockquote>
+<p>示例：计算总人数<br><code>db.score.aggregate({$group:{&#39;_id&#39;:null,num:{$sum:1}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;_id&quot; : null, &quot;num&quot; : 6 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="sort"><a href="#sort" class="headerlink" title="$sort"></a>$sort</h5><p><strong>对文案按照指定字段排序</strong><br><a href="#limit">参见$limit</a></p>
+<h5 id="goNear"><a href="#goNear" class="headerlink" title="$goNear"></a>$goNear</h5><p><strong>返回一些坐标值，这些指以按照举例指定点距离近到远进行排序</strong><br><a href="https://docs.mongodb.com/manual/reference/operator/aggregation/geoNear/#pipe._S_geoNear" target="_blank" rel="external">参见官网</a></p>
+<h4 id="聚合表达式"><a href="#聚合表达式" class="headerlink" title="聚合表达式"></a>聚合表达式</h4><p>管道操作符作为“键”,所对应的“值”叫做管道表达式。每个管道表达式只能作用于处理当前正在处理的文档，而不能进行跨文档的操作。管道表达式对文档的处理都是在内存中进行的。除了能够进行累加计算的管道表达式外，其他的表达式都是无状态的，也就是不会保留上下文的信息。<br><strong>组聚合操作符：</strong></p>
+<h5 id="sum"><a href="#sum" class="headerlink" title="$sum"></a>$sum</h5><p><strong>计算总和</strong><br><a href="#group">参见$group</a></p>
+<h5 id="avg"><a href="#avg" class="headerlink" title="$avg"></a>$avg</h5><p><strong>计算平均值</strong></p>
+<blockquote>
+<p>示例：计算语文平均成绩<br><code>db.score.aggregate({$group:{&#39;_id&#39;:null,&#39;yuwen&#39;:{$avg:&#39;$yuwen&#39;}}},{$project:{_id:0,&#39;yuwen&#39;:1}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;yuwen&quot; : 108.16666666666667 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="min"><a href="#min" class="headerlink" title="$min"></a>$min</h5><p><strong>获取集合中所有文档对应值得最小值</strong></p>
+<blockquote>
+<p>示例：计算语文最低成绩<br><code>db.score.aggregate({$group:{&#39;_id&#39;:null,&#39;yuwen&#39;:{$min:&#39;$yuwen&#39;}}},{$project:{_id:0,&#39;yuwen&#39;:1}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;yuwen&quot; : 98 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="max"><a href="#max" class="headerlink" title="$max"></a>$max</h5><p><strong>获取集合中所有文档对应值得最大值</strong></p>
+<blockquote>
+<p>示例：计算语文最高成绩<br><code>db.score.aggregate({$group:{&#39;_id&#39;:null,&#39;yuwen&#39;:{$max:&#39;$yuwen&#39;}}},{$project:{_id:0,&#39;yuwen&#39;:1}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;yuwen&quot; : 121 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="push"><a href="#push" class="headerlink" title="$push"></a>$push</h5><p><strong>在结果文档中插入值到一个数组中</strong></p>
+<blockquote>
+<p>示例：获取所有的语文成绩<br><code>db.score.aggregate({$group:{&#39;_id&#39;:null,&#39;yuwen&#39;:{$push:&#39;$yuwen&#39;}}},{$project:{_id:0,&#39;yuwen&#39;:1}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;yuwen&quot; : [ 121, 110, 100, 110, 110, 98 ] &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="addToSet"><a href="#addToSet" class="headerlink" title="$addToSet"></a>$addToSet</h5><p><strong>在结果文档中插入值到一个数组中，如果数组中已有，则不插入</strong></p>
+<blockquote>
+<p>示例：获取所有的语文成绩<br><code>db.score.aggregate({$group:{&#39;_id&#39;:null,&#39;yuwen&#39;:{$addToSet:&#39;$yuwen&#39;}}},{$project:{_id:0,&#39;yuwen&#39;:1}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;yuwen&quot; : [ 98, 100, 110, 121 ] &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="first"><a href="#first" class="headerlink" title="$first"></a>$first</h5><p><strong>根据资源文档的排序获取第一个文档数据</strong></p>
+<blockquote>
+<p>示例：获取文档第一个数据<br><code>db.score.aggregate({$group:{&#39;_id&#39;:null,&#39;yuwen&#39;:{$first:&#39;$yuwen&#39;}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;_id&quot; : null, &quot;yuwen&quot; : 121 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="last"><a href="#last" class="headerlink" title="$last"></a>$last</h5><p><strong>根据资源文档的排序获取最后一个文档数据</strong></p>
+<blockquote>
+<p>示例：获取文档最后数据<br><code>db.score.aggregate({$group:{&#39;_id&#39;:null,&#39;yuwen&#39;:{$last:&#39;$yuwen&#39;}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;_id&quot; : null, &quot;yuwen&quot; : 98 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="Bool类型聚合操作符"><a href="#Bool类型聚合操作符" class="headerlink" title="Bool类型聚合操作符"></a>Bool类型聚合操作符</h4><h5 id="and"><a href="#and" class="headerlink" title="$and"></a>$and</h5><p><strong>根据条件输出true 或者 false</strong></p>
+<blockquote>
+<p>示例：查看学生是否数学和语文都过100分<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;result&#39;:{$and:[{$gt:[&#39;$yuwen&#39;,100]},{$gt:[&#39;$shuxue&#39;,100]}]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : false &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisi&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;mingren&quot;, &quot;result&quot; : false &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="or"><a href="#or" class="headerlink" title="$or"></a>$or</h5><p><strong>根据条件输出true 或者 false</strong></p>
+<blockquote>
+<p>示例：查看学生是否数学或语文过100分<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;result&#39;:{$or:[{$gt:[&#39;$yuwen&#39;,100]},{$gt:[&#39;$shuxue&#39;,100]}]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisi&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;mingren&quot;, &quot;result&quot; : false &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="not"><a href="#not" class="headerlink" title="$not"></a>$not</h5><p><strong>根据条件输出true 或者 false</strong></p>
+<blockquote>
+<p>示例：查看学生是否语文不超过100分<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;result&#39;:{$not:[{$gt:[&#39;$yuwen&#39;,100]}]}}}</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisi&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;mingren&quot;, &quot;result&quot; : false &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="比较类型聚合操作符"><a href="#比较类型聚合操作符" class="headerlink" title="比较类型聚合操作符"></a>比较类型聚合操作符</h4><h5 id="cmp"><a href="#cmp" class="headerlink" title="$cmp"></a>$cmp</h5><p><strong>比较两个值，返回数值类型</strong></p>
+<blockquote>
+<p>示例：查看学生是否语文超过100分<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;result&#39;:{$cmp:[&#39;$yuwen&#39;,100]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;result&quot; : 1 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;result&quot; : 1 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : 0 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : 1 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisi&quot;, &quot;result&quot; : 1 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;mingren&quot;, &quot;result&quot; : -1 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="eq"><a href="#eq" class="headerlink" title="$eq "></a>$eq <span id="eq"></span></h5><p><strong>比较两个值是否相等，返回true或false</strong></p>
+<blockquote>
+<p>示例：查看学生是否语文是100分（好无聊的要求）<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;result&#39;:{$eq:[&#39;$yuwen&#39;,100]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;result&quot; : false &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;result&quot; : false &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : true &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;result&quot; : false &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisi&quot;, &quot;result&quot; : false &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;mingren&quot;, &quot;result&quot; : false &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="gt"><a href="#gt" class="headerlink" title="$gt"></a>$gt</h5><p><strong>比较是否大于，返回true或false</strong><br><a href="#eq">参见$eq</a></p>
+<h5 id="gte"><a href="#gte" class="headerlink" title="$gte"></a>$gte</h5><p><strong>比较是否大于等于，返回true或false</strong><br><a href="#eq">参见$eq</a></p>
+<h5 id="lt"><a href="#lt" class="headerlink" title="$lt"></a>$lt</h5><p><strong>比较是否小于，返回true或false</strong><br><a href="#eq">参见$eq</a></p>
+<h5 id="lte"><a href="#lte" class="headerlink" title="$lte"></a>$lte</h5><p><strong>比较是否小于等于，返回true或false</strong><br><a href="#eq">参见$eq</a></p>
+<h5 id="ne"><a href="#ne" class="headerlink" title="$ne"></a>$ne</h5><p><strong>比较是否不等于，返回true或false</strong><br><a href="#eq">参见$eq</a></p>
+<h4 id="算数类型聚合操作符"><a href="#算数类型聚合操作符" class="headerlink" title="算数类型聚合操作符"></a>算数类型聚合操作符</h4><h5 id="add"><a href="#add" class="headerlink" title="$add "></a>$add <span id="add"></span></h5><p><strong>计算数组的和</strong></p>
+<blockquote>
+<p>示例：查看学生语数外成绩总和<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;total&#39;:{$add:[&#39;$yuwen&#39;,&#39;$shuxue&#39;,&#39;$yingyu&#39;]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;total&quot; : 376 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;total&quot; : 375 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;total&quot; : 335 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;total&quot; : 329 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisi&quot;, &quot;total&quot; : 329 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;mingren&quot;, &quot;total&quot; : 215 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="divide"><a href="#divide" class="headerlink" title="$divide"></a>$divide</h5><p><strong>计算两数相除</strong></p>
+<blockquote>
+<p>示例：查看学生语文成绩，按100分制<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:1,&#39;yuwen&#39;:{$divide:[&#39;$yuwen&#39;,1.5]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;bochenlong&quot;, &quot;yuwen&quot; : 80.66666666666667 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;yuwen&quot; : 73.33333333333333 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;yuwen&quot; : 66.66666666666667 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisan&quot;, &quot;yuwen&quot; : 73.33333333333333 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;lisi&quot;, &quot;yuwen&quot; : 73.33333333333333 &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;mingren&quot;, &quot;yuwen&quot; : 65.33333333333333 &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="mod"><a href="#mod" class="headerlink" title="$mod"></a>$mod</h5><p><strong>计算两数取摩</strong><br><a href="#add">参见$add</a></p>
+<h5 id="multiply"><a href="#multiply" class="headerlink" title="$multiply"></a>$multiply</h5><p><strong>计算两数相乘</strong><br><a href="#add">参见$add</a></p>
+<h5 id="subtract"><a href="#subtract" class="headerlink" title="$subtract"></a>$subtract</h5><p><strong>计算两数相减</strong><br><a href="#add">参见$add</a></p>
+<h4 id="字符串类型聚合操作符"><a href="#字符串类型聚合操作符" class="headerlink" title="字符串类型聚合操作符"></a>字符串类型聚合操作符</h4><h5 id="concat"><a href="#concat" class="headerlink" title="$concat"></a>$concat</h5><p><strong>字符串追加</strong></p>
+<blockquote>
+<p>示例：讲学生和小组串联成一个字段<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name-team&#39;:{$concat:[&#39;$name&#39;,&#39;-&#39;,&#39;$team&#39;]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name-team&quot; : &quot;bochenlong-1&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;jiaoxinkang-2&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;lisan-3&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;lisan-3&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;lisi-3&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;mingren-2&quot; &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="strcasecmp"><a href="#strcasecmp" class="headerlink" title="$strcasecmp"></a>$strcasecmp</h5><p><strong>忽略大小写比较字符串</strong></p>
+<blockquote>
+<p>示例：将学生和小组串联成一个字段<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name-team&#39;:{$concat:[&#39;$name&#39;,&#39;-&#39;,&#39;$team&#39;]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name-team&quot; : &quot;bochenlong-1&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;jiaoxinkang-2&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;lisan-3&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;lisan-3&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;lisi-3&quot; &#125;</span><br><span class="line">&#123; &quot;name-team&quot; : &quot;mingren-2&quot; &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="substr"><a href="#substr" class="headerlink" title="$substr"></a>$substr</h5><p><strong>取子串</strong></p>
+<blockquote>
+<p>示例：<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:{$substr:[&#39;$name&#39;,0,1]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;b&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;j&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;l&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;l&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;l&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;m&quot; &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="toUpper"><a href="#toUpper" class="headerlink" title="$toUpper "></a>$toUpper <span id="toUpper"></span></h5><p><strong>将字符串转换为大写</strong></p>
+<blockquote>
+<p>示例：<br><code>db.score.aggregate({$project:{&#39;_id&#39;:0,&#39;name&#39;:{$toUpper:&#39;$name&#39;}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;name&quot; : &quot;BOCHENLONG&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;JIAOXINKANG&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;LISAN&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;LISAN&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;LISI&quot; &#125;</span><br><span class="line">&#123; &quot;name&quot; : &quot;MINGREN&quot; &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="toLower"><a href="#toLower" class="headerlink" title="$toLower"></a>$toLower</h5><p><strong>将字符串转换为小写</strong><br><a href="#toUpper">参见$toUpper</a></p>
+<h4 id="日期类型聚合操作符"><a href="#日期类型聚合操作符" class="headerlink" title="日期类型聚合操作符"></a>日期类型聚合操作符</h4><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$dayOfYear</td>
+<td>获取天（1-366）</td>
+</tr>
+<tr>
+<td>$dayOfMonth</td>
+<td>获取月（1-31）</td>
+</tr>
+<tr>
+<td>$dayOfWeek</td>
+<td>获取星期（1-7）</td>
+</tr>
+<tr>
+<td>$year</td>
+<td>获取年</td>
+</tr>
+<tr>
+<td>$month</td>
+<td>获取月（1-12）</td>
+</tr>
+<tr>
+<td>$week</td>
+<td>获取星期（0-53）</td>
+</tr>
+<tr>
+<td>$hour</td>
+<td>获取分（0-23）</td>
+</tr>
+<tr>
+<td>$minute</td>
+<td>获取分（0-59）</td>
+</tr>
+<tr>
+<td>$second</td>
+<td>获取秒（0-59）</td>
+</tr>
+<tr>
+<td>$millisecond</td>
+<td>获取毫秒（0-999）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>示例文档：<br>{ “_id” : 1, “item” : “abc”, “price” : 10, “quantity” : 2, “date” : ISODate(“2014-01-01T08:15:39.736Z”) }<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">db.sales.aggregate(</span><br><span class="line">   [</span><br><span class="line">     &#123;</span><br><span class="line">       $project:</span><br><span class="line">         &#123;</span><br><span class="line">           year: &#123; $year: &quot;$date&quot; &#125;,</span><br><span class="line">           month: &#123; $month: &quot;$date&quot; &#125;,</span><br><span class="line">           day: &#123; $dayOfMonth: &quot;$date&quot; &#125;,</span><br><span class="line">           hour: &#123; $hour: &quot;$date&quot; &#125;,</span><br><span class="line">           minutes: &#123; $minute: &quot;$date&quot; &#125;,</span><br><span class="line">           seconds: &#123; $second: &quot;$date&quot; &#125;,</span><br><span class="line">           milliseconds: &#123; $millisecond: &quot;$date&quot; &#125;,</span><br><span class="line">           dayOfYear: &#123; $dayOfYear: &quot;$date&quot; &#125;,</span><br><span class="line">           dayOfWeek: &#123; $dayOfWeek: &quot;$date&quot; &#125;,</span><br><span class="line">           week: &#123; $week: &quot;$date&quot; &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;_id&quot; : 1,</span><br><span class="line">  &quot;year&quot; : 2014,</span><br><span class="line">  &quot;month&quot; : 1,</span><br><span class="line">  &quot;day&quot; : 1,</span><br><span class="line">  &quot;hour&quot; : 8,</span><br><span class="line">  &quot;minutes&quot; : 15,</span><br><span class="line">  &quot;seconds&quot; : 39,</span><br><span class="line">  &quot;milliseconds&quot; : 736,</span><br><span class="line">  &quot;dayOfYear&quot; : 1,</span><br><span class="line">  &quot;dayOfWeek&quot; : 4,</span><br><span class="line">  &quot;week&quot; : 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="条件类型聚合操作符"><a href="#条件类型聚合操作符" class="headerlink" title="条件类型聚合操作符"></a>条件类型聚合操作符</h4><h5 id="cond"><a href="#cond" class="headerlink" title="$cond "></a>$cond <span id="cond"></span></h5><p><strong>语法</strong><br><code>{ $cond: { if: &lt;boolean-expression&gt;, then: &lt;true-case&gt;, else: &lt;false-case-&gt; } }</code><br>or<br><code>{ $cond: [ &lt;boolean-expression&gt;, &lt;true-case&gt;, &lt;false-case&gt; ] }</code></p>
+<blockquote>
+<p>示例：筛选出全班总分600以上含600分为优秀，500分含500分良，其它差<br><code>db.score.aggregate({$unwind:&#39;$lizong&#39;},{$group:{&#39;_id&#39;:&#39;$_id&#39;,&#39;name&#39;:{$first:&#39;$name&#39;},&#39;yuwen&#39;:{$first:&#39;$yuwen&#39;},&#39;shuxue&#39;:{$first:&#39;$shuxue&#39;},&#39;yingyu&#39;:{$first:&#39;$yingyu&#39;},lizong:{$sum:&#39;$lizong&#39;}}},{$project:{&#39;name&#39;:1,&#39;zf&#39;:{$add:[&#39;$yuwen&#39;,&#39;$shuxue&#39;,&#39;$yingyu&#39;,&#39;$lizong&#39;]}}},{$project:{&#39;name&#39;:1,&#39;zf&#39;:1,&#39;flag&#39;:{$cond: [ {$gte:[&#39;$zf&#39;,600]},&#39;优秀&#39;,{$cond:[{$and:[{$gte:[&#39;$zf&#39;,500]},{$lt:[&#39;$zf&#39;,600]}]},&#39;良&#39;,&#39;差&#39;]} ]}}})</code><br>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a9d4f4de94710e104213&quot;), &quot;name&quot; : &quot;mingren&quot;, &quot;zf&quot; : 325, &quot;flag&quot; : &quot;差&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a97df4de94710e104212&quot;), &quot;name&quot; : &quot;lisi&quot;, &quot;zf&quot; : 579, &quot;flag&quot; : &quot;良&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a96df4de94710e104211&quot;), &quot;name&quot; : &quot;lisan&quot;, &quot;zf&quot; : 579, &quot;flag&quot; : &quot;良&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a959f4de94710e104210&quot;), &quot;name&quot; : &quot;lisan&quot;, &quot;zf&quot; : 555, &quot;flag&quot; : &quot;良&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a936f4de94710e10420f&quot;), &quot;name&quot; : &quot;jiaoxinkang&quot;, &quot;zf&quot; : 624, &quot;flag&quot; : &quot;优秀&quot; &#125;</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;5767a91ef4de94710e10420e&quot;), &quot;name&quot; : &quot;bochenlong&quot;, &quot;zf&quot; : 604, &quot;flag&quot; : &quot;优秀&quot; &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="ifNull"><a href="#ifNull" class="headerlink" title="$ifNull"></a>$ifNull</h5><p><strong>语法</strong><br><code>{ $ifNull: [ &lt;expression&gt;, &lt;replacement-expression-if-null&gt; ] }</code><br><a href="#cond">参见$cond</a></p>
+<p>更多聚合管道操作见<a href="https://docs.mongodb.com/manual/reference/operator/aggregation/" target="_blank" rel="external">官网</a></p>
+<h3 id="MongoDB复制"><a href="#MongoDB复制" class="headerlink" title="MongoDB复制"></a>MongoDB复制</h3><p>MongoDB复制是将数据同步在多个服务器的过程。复制提供了数据的冗余备份，并在多个服务器上存储数据副本，提高了数据的可用性， 并可以保证数据的安全性。复制还允许您从硬件故障和服务中断中恢复数据。</p>
+<h4 id="MongoDB复制原理"><a href="#MongoDB复制原理" class="headerlink" title="MongoDB复制原理"></a>MongoDB复制原理</h4><p>mongodb的复制至少需要两个节点。其中一个是主节点，负责处理客户端请求，其余的都是从节点，负责复制主节点上的数据。<br>mongodb各个节点常见的搭配方式为：一主一从、一主多从。<br>主节点记录在其上的所有操作oplog，从节点定期轮询主节点获取这些操作，然后对自己的数据副本执行这些操作，从而保证从节点的数据与主节点一致。</p>
+<h4 id="MongoDB复制设置"><a href="#MongoDB复制设置" class="headerlink" title="MongoDB复制设置"></a>MongoDB复制设置</h4><ol>
+<li>启动MongoDB <code>/usr/bin/mongod -f /etc/mongod.conf --replSet rs0</code><blockquote>
+<p>注意，yum安装的MongoDB默认开机启动，使用/etc/mongod.conf，里面设置了MongoDB的数据路径/var/lib/mongo</p>
+</blockquote>
+</li>
+<li><p>启动一个副本集 <code>rs.initiate()</code>   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;info2&quot; : &quot;no configuration specified. Using a default configuration for the set&quot;,</span><br><span class="line">	&quot;me&quot; : &quot;localhost.localdomain:27017&quot;,</span><br><span class="line">	&quot;ok&quot; : 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 相应的命令前出现 <code>rs0:PRIMARY&gt;</code></p>
+</li>
+<li><p>查看集群配置 <code>rs.conf()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">    &quot;protocolVersion&quot; : NumberLong(1),</span><br><span class="line">	&quot;members&quot; : [</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;_id&quot; : 0,</span><br><span class="line">			&quot;host&quot; : &quot;localhost.localdomain:27017&quot;,</span><br><span class="line">			&quot;arbiterOnly&quot; : false,</span><br><span class="line">			&quot;buildIndexes&quot; : true,</span><br><span class="line">			&quot;hidden&quot; : false,</span><br><span class="line">			&quot;priority&quot; : 1,</span><br><span class="line">			&quot;tags&quot; : &#123;</span><br><span class="line">				</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;slaveDelay&quot; : NumberLong(0),</span><br><span class="line">			&quot;votes&quot; : 1</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动MongoDB2 <code>mongod --port &#39;27018&#39; --dbpath &#39;/data/db1&#39; --replSet rs0</code></p>
+</li>
+<li><p>主库添加子节点 <code>rs.add(&#39;localhost.localdomain:27018&#39;)</code>，注意这里不能用IP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;ok&quot; : 1 &#125;</span><br></pre></td></tr></table></figure>
+<p>查看集群配置 <code>rs.conf</code>,节点已经加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">    &quot;protocolVersion&quot; : NumberLong(1),</span><br><span class="line">     &quot;members&quot; : [</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;_id&quot; : 0,</span><br><span class="line">			&quot;host&quot; : &quot;localhost.localdomain:27017&quot;,</span><br><span class="line">			&quot;arbiterOnly&quot; : false,</span><br><span class="line">			&quot;buildIndexes&quot; : true,</span><br><span class="line">			&quot;hidden&quot; : false,</span><br><span class="line">			&quot;priority&quot; : 1,</span><br><span class="line">			&quot;tags&quot; : &#123;</span><br><span class="line">				</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;slaveDelay&quot; : NumberLong(0),</span><br><span class="line">			&quot;votes&quot; : 1</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;_id&quot; : 1,</span><br><span class="line">			&quot;host&quot; : &quot;localhost.localdomain:27018&quot;,</span><br><span class="line">			&quot;arbiterOnly&quot; : false,</span><br><span class="line">			&quot;buildIndexes&quot; : true,</span><br><span class="line">			&quot;hidden&quot; : false,</span><br><span class="line">			&quot;priority&quot; : 1,</span><br><span class="line">			&quot;tags&quot; : &#123;</span><br><span class="line">				</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;slaveDelay&quot; : NumberLong(0),</span><br><span class="line">			&quot;votes&quot; : 1</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证同步<br>设置从库可读 <code>db.getMongo().setSlaveOk()</code><br>查看数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rs0:SECONDARY&gt; show dbs</span><br><span class="line">local  0.000GB</span><br><span class="line">mydb   0.000GB</span><br></pre></td></tr></table></figure>
+<p>查看同步到的数据（节点添加即同步主库数据，主库添加数据从库同步）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rs0:SECONDARY&gt; db.score.find()</span><br><span class="line">&#123; &quot;_id&quot; : ObjectId(&quot;576920960a90571c780f81e5&quot;), &quot;name&quot; : &quot;wanglei&quot;, &quot;team&quot; : 5, &quot;yuwen&quot; : 111, &quot;shuxue&quot; : 121, &quot;yingyu&quot; : 108, &quot;lizong&quot; : [ 80, 76, 77 ] &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="MongoDB分片"><a href="#MongoDB分片" class="headerlink" title="MongoDB分片"></a>MongoDB分片</h3><p>在Mongodb里面存在另一种集群，就是分片技术,可以满足MongoDB数据量大量增长的需求。<br>当MongoDB存储海量的数据时，一台机器可能不足以存储数据，也可能不足以提供可接受的读写吞吐量。这时，我们就可以通过在多台机器上分割数据，使得数据库系统能存储和处理更多的数据。</p>
+<h4 id="MongoDB分片原理"><a href="#MongoDB分片原理" class="headerlink" title="MongoDB分片原理"></a>MongoDB分片原理</h4><p><img src="http://i.imgur.com/zArMYmD.png" alt=""><br>上图中主要有如下所述三个主要组件：</p>
+<ul>
+<li>Shard:用于存储实际的数据块，实际生产环境中一个shard server角色可由几台机器组个一个relica set承担，防止主机单点故障</li>
+<li>Config Server:mongod实例，存储了整个 ClusterMetadata，其中包括 chunk信息。</li>
+<li>Routers:前端路由，客户端由此接入，且让整个集群看上去像单一数据库，前端应用可以透明使用。</li>
+</ul>
+<h4 id="MongoDB分片配置"><a href="#MongoDB分片配置" class="headerlink" title="MongoDB分片配置"></a>MongoDB分片配置</h4><p>分片实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">shard server 0 : 27000</span><br><span class="line">shard server 0 bak : 27001</span><br><span class="line">shard server 1 : 27010</span><br><span class="line">shard server 1 bak : 27011</span><br><span class="line">config server0 : 21000</span><br><span class="line">congig serverbak : 21001</span><br><span class="line">route process0 : 40000</span><br><span class="line">route process1 : 40001</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>启动分片</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>我知道是不会有人点的，但万一有人想不开呢？</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward.png" alt="bochenlong WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward.png" alt="bochenlong Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MongoDB/" rel="tag">#MongoDB</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/16/MongoDB学习笔记02【基础知识】/" rel="next" title="MongoDB学习笔记02【基础知识】">
+                <i class="fa fa-chevron-left"></i> MongoDB学习笔记02【基础知识】
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/30/Java8-Lambda/" rel="prev" title="Java8-Lambda">
+                Java8-Lambda <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="bochenlong" />
+          <p class="site-author-name" itemprop="name">bochenlong</p>
+          <p class="site-description motion-element" itemprop="description">唯有努力不负人！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/bochenlong" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              博客收藏
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://tech.meituan.com/" title="美团点评技术团队" target="_blank">美团点评技术团队</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://jm.taobao.org/" title="阿里中间件团队" target="_blank">阿里中间件团队</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB索引"><span class="nav-number">1.</span> <span class="nav-text">MongoDB索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法"><span class="nav-number">1.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例"><span class="nav-number">1.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB聚合"><span class="nav-number">2.</span> <span class="nav-text">MongoDB聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法-1"><span class="nav-number">2.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管道操作符"><span class="nav-number">2.2.</span> <span class="nav-text">管道操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#project"><span class="nav-number">2.2.1.</span> <span class="nav-text">$project</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#match"><span class="nav-number">2.2.2.</span> <span class="nav-text">$match</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#limit"><span class="nav-number">2.2.3.</span> <span class="nav-text">$limit </span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#skip"><span class="nav-number">2.2.4.</span> <span class="nav-text">$skip</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#unwind"><span class="nav-number">2.2.5.</span> <span class="nav-text">$unwind</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#group"><span class="nav-number">2.2.6.</span> <span class="nav-text">$group </span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sort"><span class="nav-number">2.2.7.</span> <span class="nav-text">$sort</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#goNear"><span class="nav-number">2.2.8.</span> <span class="nav-text">$goNear</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#聚合表达式"><span class="nav-number">2.3.</span> <span class="nav-text">聚合表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sum"><span class="nav-number">2.3.1.</span> <span class="nav-text">$sum</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#avg"><span class="nav-number">2.3.2.</span> <span class="nav-text">$avg</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#min"><span class="nav-number">2.3.3.</span> <span class="nav-text">$min</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#max"><span class="nav-number">2.3.4.</span> <span class="nav-text">$max</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#push"><span class="nav-number">2.3.5.</span> <span class="nav-text">$push</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#addToSet"><span class="nav-number">2.3.6.</span> <span class="nav-text">$addToSet</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#first"><span class="nav-number">2.3.7.</span> <span class="nav-text">$first</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#last"><span class="nav-number">2.3.8.</span> <span class="nav-text">$last</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bool类型聚合操作符"><span class="nav-number">2.4.</span> <span class="nav-text">Bool类型聚合操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#and"><span class="nav-number">2.4.1.</span> <span class="nav-text">$and</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#or"><span class="nav-number">2.4.2.</span> <span class="nav-text">$or</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#not"><span class="nav-number">2.4.3.</span> <span class="nav-text">$not</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较类型聚合操作符"><span class="nav-number">2.5.</span> <span class="nav-text">比较类型聚合操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cmp"><span class="nav-number">2.5.1.</span> <span class="nav-text">$cmp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#eq"><span class="nav-number">2.5.2.</span> <span class="nav-text">$eq </span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gt"><span class="nav-number">2.5.3.</span> <span class="nav-text">$gt</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gte"><span class="nav-number">2.5.4.</span> <span class="nav-text">$gte</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#lt"><span class="nav-number">2.5.5.</span> <span class="nav-text">$lt</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#lte"><span class="nav-number">2.5.6.</span> <span class="nav-text">$lte</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ne"><span class="nav-number">2.5.7.</span> <span class="nav-text">$ne</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算数类型聚合操作符"><span class="nav-number">2.6.</span> <span class="nav-text">算数类型聚合操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#add"><span class="nav-number">2.6.1.</span> <span class="nav-text">$add </span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#divide"><span class="nav-number">2.6.2.</span> <span class="nav-text">$divide</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mod"><span class="nav-number">2.6.3.</span> <span class="nav-text">$mod</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#multiply"><span class="nav-number">2.6.4.</span> <span class="nav-text">$multiply</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#subtract"><span class="nav-number">2.6.5.</span> <span class="nav-text">$subtract</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串类型聚合操作符"><span class="nav-number">2.7.</span> <span class="nav-text">字符串类型聚合操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#concat"><span class="nav-number">2.7.1.</span> <span class="nav-text">$concat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#strcasecmp"><span class="nav-number">2.7.2.</span> <span class="nav-text">$strcasecmp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#substr"><span class="nav-number">2.7.3.</span> <span class="nav-text">$substr</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#toUpper"><span class="nav-number">2.7.4.</span> <span class="nav-text">$toUpper </span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#toLower"><span class="nav-number">2.7.5.</span> <span class="nav-text">$toLower</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日期类型聚合操作符"><span class="nav-number">2.8.</span> <span class="nav-text">日期类型聚合操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件类型聚合操作符"><span class="nav-number">2.9.</span> <span class="nav-text">条件类型聚合操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cond"><span class="nav-number">2.9.1.</span> <span class="nav-text">$cond </span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ifNull"><span class="nav-number">2.9.2.</span> <span class="nav-text">$ifNull</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB复制"><span class="nav-number">3.</span> <span class="nav-text">MongoDB复制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MongoDB复制原理"><span class="nav-number">3.1.</span> <span class="nav-text">MongoDB复制原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MongoDB复制设置"><span class="nav-number">3.2.</span> <span class="nav-text">MongoDB复制设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB分片"><span class="nav-number">4.</span> <span class="nav-text">MongoDB分片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MongoDB分片原理"><span class="nav-number">4.1.</span> <span class="nav-text">MongoDB分片原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MongoDB分片配置"><span class="nav-number">4.2.</span> <span class="nav-text">MongoDB分片配置</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">bochenlong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'bochenlong';
+      var disqus_identifier = '2016/06/17/MongoDB学习笔记03【进阶】/';
+      var disqus_title = 'MongoDB学习笔记03【进阶】';
+      var disqus_url = 'http://bochenlong.github.io/2016/06/17/MongoDB学习笔记03【进阶】/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("5BxSUBR0QY0PIUoEKmjEw61z-gzGzoHsz", "BltEGEoQiLNyx3Dn2sW5EgdF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
