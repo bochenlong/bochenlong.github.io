@@ -88,23 +88,20 @@
 
 <meta name="description" content="Java8-Stream流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。
 构建流
-由值创建流使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。
-1Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;q">
+由值创建流使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。1Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;qu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java8_Stream整理">
 <meta property="og:url" content="http://bochenlong.github.io/2016/08/21/Java8_Stream整理/index.html">
 <meta property="og:site_name" content="薄小破">
 <meta property="og:description" content="Java8-Stream流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。
 构建流
-由值创建流使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。
-1Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;q">
-<meta property="og:updated_time" content="2016-08-26T02:43:30.152Z">
+由值创建流使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。1Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;qu">
+<meta property="og:updated_time" content="2016-08-26T02:44:51.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java8_Stream整理">
 <meta name="twitter:description" content="Java8-Stream流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。
 构建流
-由值创建流使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。
-1Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;q">
+由值创建流使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。1Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;qu">
 
 
 
@@ -359,11 +356,12 @@
       
         <h3 id="Java8-Stream"><a href="#Java8-Stream" class="headerlink" title="Java8-Stream"></a>Java8-Stream</h3><p>流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。</p>
 <h3 id="构建流"><a href="#构建流" class="headerlink" title="构建流"></a>构建流</h3><ol>
-<li><p>由值创建流<br>使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(&quot;java8&quot;,&quot;name&quot;,&quot;passWord&quot;);</span><br></pre></td></tr></table></figure>
+<li>由值创建流<br>使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(&quot;java8&quot;,&quot;name&quot;,&quot;passWord&quot;);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>由数组创建流</p>
+</ol>
 <a id="more"></a>
+<ol>
+<li><p>由数组创建流</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int[] numbers = new int[]&#123;1,2,6,4,8,3,10&#125;;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>由文件生成流</p>
