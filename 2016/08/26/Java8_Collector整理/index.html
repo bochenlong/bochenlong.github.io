@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://bochenlong.github.io/2016/08/26/Java8_Collector整理/index.html">
 <meta property="og:site_name" content="薄小破">
 <meta property="og:description" content="收集器Stream中的collect可以将流中的元素累积成一个汇总结果，使用收集器可以简洁而灵活地定义collect用来生成结果集合的标准。更具体的来说，对流调用collect方法将对流中的元素触发一个归约操作，由Collector来参数化。一般来说，Collector会对元素应用一个转换函数（很多时候是不体现任何效果的恒等转换，例如toList()），并将结果累积在一个数据结构中，从而产生这一过">
-<meta property="og:updated_time" content="2016-08-26T02:39:57.117Z">
+<meta property="og:updated_time" content="2016-08-26T02:41:39.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java8_Collector整理">
 <meta name="twitter:description" content="收集器Stream中的collect可以将流中的元素累积成一个汇总结果，使用收集器可以简洁而灵活地定义collect用来生成结果集合的标准。更具体的来说，对流调用collect方法将对流中的元素触发一个归约操作，由Collector来参数化。一般来说，Collector会对元素应用一个转换函数（很多时候是不体现任何效果的恒等转换，例如toList()），并将结果累积在一个数据结构中，从而产生这一过">
@@ -355,6 +355,7 @@
 <li>元素分区   </li>
 </ul>
 <h3 id="元素归约和汇总"><a href="#元素归约和汇总" class="headerlink" title="元素归约和汇总"></a>元素归约和汇总</h3><h4 id="toList"><a href="#toList" class="headerlink" title="toList"></a>toList</h4><p><em>toList把流中的项目收集到一个List</em><br>使用示例获取菜单的全部列表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">menu.stream().map(Dish::getName).collect(Collectors.toList());</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <h4 id="toSet"><a href="#toSet" class="headerlink" title="toSet"></a>toSet</h4><p><em>toSet把流中所有项目收集到一个Set，删除重复项</em><br>使用示例获取全部的菜品种类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">menu.stream().map(Dish::getType).collect(Collectors.toSet());</span><br></pre></td></tr></table></figure></p>
 <h4 id="toCollect"><a href="#toCollect" class="headerlink" title="toCollect"></a>toCollect</h4><p><em>toCollect把流中所有项目收集到给定的供应源创建的集合</em><br>使用示例获取菜单的全部集合：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">#### counting</span><br><span class="line">*counting计算流中的元素的个数*   </span><br><span class="line">使用示例获取菜单的菜品数量：</span><br></pre></td></tr></table></figure></p>
 <p>menu.stream().map(Dish::getName).distinct().collect(Collectors.counting());<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### minBy/maxBy</span><br><span class="line">*查询流中的最大元素和最小元素*</span><br><span class="line">使用示例获取最大热量/最小热量的菜品</span><br></pre></td></tr></table></figure></p>
@@ -384,7 +385,6 @@
 <p>最终结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Container c = menu.stream().collect(new ToMyCollector());</span><br><span class="line">        System.out.println(c.getNo());</span><br><span class="line">        System.out.println(c.getOk());</span><br><span class="line">输出:</span><br><span class="line">[duck, beef, chicken, french fries, rice, season fruit, pizza, prawns, salmon]</span><br><span class="line">[french fries, rice, season fruit, pizza]</span><br></pre></td></tr></table></figure></p>
 <h4 id="collect重载方法方式"><a href="#collect重载方法方式" class="headerlink" title="collect重载方法方式"></a>collect重载方法方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">menu.stream().collect(Container::new, (Container c, Dish t1) -&gt; &#123;</span><br><span class="line">           if (t1.isVegetarian()) c.getOk().add(t1);</span><br><span class="line">           c.getNo().add(t1);</span><br><span class="line">       &#125;, (Container c1, Container c2) -&gt; &#123;</span><br><span class="line">           c1.getOk().addAll(c2.getOk());</span><br><span class="line">           c1.getNo().addAll(c2.getNo());</span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure>
 <p>这种写法比较简洁和紧凑，但是不易读。另外不能传Characteristics参数，永远是一个IDENTITY_FINISH和CONCURRENT但并非UNORDERED的收集器。</p>
-<p>### </p>
 
       
     </div>
