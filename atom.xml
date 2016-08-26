@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://bochenlong.github.io/"/>
-  <updated>2016-08-26T02:41:39.787Z</updated>
+  <updated>2016-08-26T02:43:12.747Z</updated>
   <id>http://bochenlong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://bochenlong.github.io/2016/08/26/Java8_Collector%E6%95%B4%E7%90%86/"/>
     <id>http://bochenlong.github.io/2016/08/26/Java8_Collector整理/</id>
     <published>2016-08-26T02:23:44.000Z</published>
-    <updated>2016-08-26T02:41:39.787Z</updated>
+    <updated>2016-08-26T02:43:12.747Z</updated>
     
     <content type="html">&lt;h3 id=&quot;收集器&quot;&gt;&lt;a href=&quot;#收集器&quot; class=&quot;headerlink&quot; title=&quot;收集器&quot;&gt;&lt;/a&gt;收集器&lt;/h3&gt;&lt;p&gt;Stream中的collect可以将流中的元素累积成一个汇总结果，使用收集器可以简洁而灵活地定义collect用来生成结果集合的标准。更具体的来说，对流调用collect方法将对流中的元素触发一个归约操作，由Collector来参数化。一般来说，Collector会对元素应用一个转换函数（很多时候是不体现任何效果的恒等转换，例如toList()），并将结果累积在一个数据结构中，从而产生这一过程的最终输出。&lt;br&gt;Collector主要提供3大功能：   &lt;/p&gt;
 &lt;ul&gt;
@@ -28,8 +28,7 @@
 &lt;li&gt;元素分组   &lt;/li&gt;
 &lt;li&gt;元素分区   &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&quot;元素归约和汇总&quot;&gt;&lt;a href=&quot;#元素归约和汇总&quot; class=&quot;headerlink&quot; title=&quot;元素归约和汇总&quot;&gt;&lt;/a&gt;元素归约和汇总&lt;/h3&gt;&lt;h4 id=&quot;toList&quot;&gt;&lt;a href=&quot;#toList&quot; class=&quot;headerlink&quot; title=&quot;toList&quot;&gt;&lt;/a&gt;toList&lt;/h4&gt;&lt;p&gt;&lt;em&gt;toList把流中的项目收集到一个List&lt;/em&gt;&lt;br&gt;使用示例获取菜单的全部列表：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().map(Dish::getName).collect(Collectors.toList());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;元素归约和汇总&quot;&gt;&lt;a href=&quot;#元素归约和汇总&quot; class=&quot;headerlink&quot; title=&quot;元素归约和汇总&quot;&gt;&lt;/a&gt;元素归约和汇总&lt;/h3&gt;&lt;h4 id=&quot;toList&quot;&gt;&lt;a href=&quot;#toList&quot; class=&quot;headerlink&quot; title=&quot;toList&quot;&gt;&lt;/a&gt;toList&lt;/h4&gt;&lt;p&gt;&lt;em&gt;toList把流中的项目收集到一个List&lt;/em&gt;&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;使用示例获取菜单的全部列表：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().map(Dish::getName).collect(Collectors.toList());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;h4 id=&quot;toSet&quot;&gt;&lt;a href=&quot;#toSet&quot; class=&quot;headerlink&quot; title=&quot;toSet&quot;&gt;&lt;/a&gt;toSet&lt;/h4&gt;&lt;p&gt;&lt;em&gt;toSet把流中所有项目收集到一个Set，删除重复项&lt;/em&gt;&lt;br&gt;使用示例获取全部的菜品种类：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().map(Dish::getType).collect(Collectors.toSet());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;h4 id=&quot;toCollect&quot;&gt;&lt;a href=&quot;#toCollect&quot; class=&quot;headerlink&quot; title=&quot;toCollect&quot;&gt;&lt;/a&gt;toCollect&lt;/h4&gt;&lt;p&gt;&lt;em&gt;toCollect把流中所有项目收集到给定的供应源创建的集合&lt;/em&gt;&lt;br&gt;使用示例获取菜单的全部集合：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;```&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#### counting&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*counting计算流中的元素的个数*   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;使用示例获取菜单的菜品数量：&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;menu.stream().map(Dish::getName).distinct().collect(Collectors.counting());&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;##### minBy/maxBy&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*查询流中的最大元素和最小元素*&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;使用示例获取最大热量/最小热量的菜品&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -69,7 +68,7 @@
 &lt;li&gt;元素分组   &lt;/li&gt;
 &lt;li&gt;元素分区   &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&quot;元素归约和汇总&quot;&gt;&lt;a href=&quot;#元素归约和汇总&quot; class=&quot;headerlink&quot; title=&quot;元素归约和汇总&quot;&gt;&lt;/a&gt;元素归约和汇总&lt;/h3&gt;&lt;h4 id=&quot;toList&quot;&gt;&lt;a href=&quot;#toList&quot; class=&quot;headerlink&quot; title=&quot;toList&quot;&gt;&lt;/a&gt;toList&lt;/h4&gt;&lt;p&gt;&lt;em&gt;toList把流中的项目收集到一个List&lt;/em&gt;&lt;br&gt;使用示例获取菜单的全部列表：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;menu.stream().map(Dish::getName).collect(Collectors.toList());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;元素归约和汇总&quot;&gt;&lt;a href=&quot;#元素归约和汇总&quot; class=&quot;headerlink&quot; title=&quot;元素归约和汇总&quot;&gt;&lt;/a&gt;元素归约和汇总&lt;/h3&gt;&lt;h4 id=&quot;toList&quot;&gt;&lt;a href=&quot;#toList&quot; class=&quot;headerlink&quot; title=&quot;toList&quot;&gt;&lt;/a&gt;toList&lt;/h4&gt;&lt;p&gt;&lt;em&gt;toList把流中的项目收集到一个List&lt;/em&gt;&lt;br&gt;
     
     </summary>
     
@@ -87,7 +86,7 @@
     <link href="http://bochenlong.github.io/2016/08/21/Java8_Stream%E6%95%B4%E7%90%86/"/>
     <id>http://bochenlong.github.io/2016/08/21/Java8_Stream整理/</id>
     <published>2016-08-21T03:10:22.000Z</published>
-    <updated>2016-08-26T02:38:37.710Z</updated>
+    <updated>2016-08-26T02:43:30.152Z</updated>
     
     <content type="html">&lt;h3 id=&quot;Java8-Stream&quot;&gt;&lt;a href=&quot;#Java8-Stream&quot; class=&quot;headerlink&quot; title=&quot;Java8-Stream&quot;&gt;&lt;/a&gt;Java8-Stream&lt;/h3&gt;&lt;p&gt;流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。&lt;/p&gt;
 &lt;h3 id=&quot;构建流&quot;&gt;&lt;a href=&quot;#构建流&quot; class=&quot;headerlink&quot; title=&quot;构建流&quot;&gt;&lt;/a&gt;构建流&lt;/h3&gt;&lt;ol&gt;
@@ -95,6 +94,7 @@
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;quot;name&amp;quot;,&amp;quot;passWord&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;由数组创建流&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;int[] numbers = new int[]&amp;#123;1,2,6,4,8,3,10&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;由文件生成流&lt;/p&gt;
@@ -165,7 +165,12 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;Java8-Stream&quot;&gt;&lt;a href=&quot;#Java8-Stream&quot; class=&quot;headerlink&quot; title=&quot;Java8-Stream&quot;&gt;&lt;/a&gt;Java8-Stream&lt;/h3&gt;&lt;p&gt;流是Java8 API的新成员，它允许你以声明方式处理数据集
+      &lt;h3 id=&quot;Java8-Stream&quot;&gt;&lt;a href=&quot;#Java8-Stream&quot; class=&quot;headerlink&quot; title=&quot;Java8-Stream&quot;&gt;&lt;/a&gt;Java8-Stream&lt;/h3&gt;&lt;p&gt;流是Java8 API的新成员，它允许你以声明方式处理数据集合，你可以把它看成遍历数据集的高级迭代器；此外，流还可以透明地的并行处理，让你的代码性能更好。&lt;/p&gt;
+&lt;h3 id=&quot;构建流&quot;&gt;&lt;a href=&quot;#构建流&quot; class=&quot;headerlink&quot; title=&quot;构建流&quot;&gt;&lt;/a&gt;构建流&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;由值创建流&lt;br&gt;使用静态方法Stream.of，通过显式创建一个流。它可以接受任意数量的参数。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Stream&amp;lt;String&amp;gt; stream = Stream.of(&amp;quot;java8&amp;quot;,&amp;quot;name&amp;quot;,&amp;quot;passWord&amp;quot;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;由数组创建流&lt;/p&gt;
     
     </summary>
     
